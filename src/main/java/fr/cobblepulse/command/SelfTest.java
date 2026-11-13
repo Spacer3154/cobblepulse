@@ -166,6 +166,117 @@ public final class SelfTest {
         return 1;
     }
 
+    private static FakePlayer fake(ServerLevel level, String name, String pokemon, int dx) {
+        FakePlayer f = FakePlayer.get(level, new GameProfile(UUID.nameUUIDFromBytes(("cp-" + name).getBytes(StandardCharsets.UTF_8)), name));
+        BlockPos spawn = level.getSharedSpawnPos();
+        f.setPos(spawn.getX() + 0.5 + dx, spawn.getY() + 1, spawn.getZ() + 0.5);
+        Players.registerTest(f);
+        if (CobblemonBridge.partyList(f).isEmpty()) CobblemonBridge.givePokemon(f, pokemon);
+        return f;
+    }
+
+    /** Tournoi complet a 3 joueurs (bye, deux rondes, sacre, recompenses) + clans en guerre. */
+    public static int tournament(CommandSourceStack src) {
+        if (!"true".equals(System.getProperty("cobblepulse.selftest"))) {
+            check(src, "tournament", false, "lancer le serveur avec -Dcobblepulse.selftest=true");
+            return 0;
+        }
+        ServerLevel level = src.getServer().overworld();
+        FakePlayer a = fake(level, "CPAlpha", "bulbasaur level=15", 8);
+        FakePlayer b = fake(level, "CPBravo", "squirtle level=15", 10);
+        FakePlayer c = fake(level, "CPCharlie", "eevee level=15", 12);
+        fr.cobblepulse.data.ClanData ca = fr.cobblepulse.clan.ClanManager.create(a, "TestAlpha", "TA");
+        fr.cobblepulse.data.ClanData cb = fr.cobblepulse.clan.ClanManager.create(b, "TestBravo", "TB");
+        check(src, "clan.create", ca != null && cb != null, null);
+        if (ca == null || cb == null) return 0;
+        fr.cobblepulse.clan.ClanManager.setMode(b, fr.cobblepulse.clan.ClanManager.Mode.OPEN);
+        fr.cobblepulse.clan.ClanManager.join(c, cb);
+        check(src, "clan.join_open", fr.cobblepulse.clan.ClanManager.clanOf(c.getUUID()) == cb, null);
+        fr.cobblepulse.clan.WarManager.declare(a, cb);
+        check(src, "clan.war_declared", fr.cobblepulse.clan.WarManager.activeWar(ca) != null, null);
+        fr.cobblepulse.clan.ClanManager.inventory(ca).setItem(0, new ItemStack(Items.EMERALD, 3));
+        check(src, "clan.inventory", fr.cobblepulse.clan.ClanManager.inventory(ca).getItem(0).getCount() == 3, null);
+        fr.cobblepulse.tournament.RewardManager.chest("first").setItem(0, new ItemStack(Items.DIAMOND, 5));
+        if (TournamentManager.arena("selftest") == null) TournamentManager.addArena("selftest");
+        fr.cobblepulse.data.MiscState.ArenaData arena = TournamentManager.arena("selftest");
+        arena.p1 = Loc.of(a);
+        arena.p2 = Loc.of(b);
+        TournamentManager.create(null, "ag", "Selftest Cup", src);
+        TournamentManager.join(a);
+        TournamentManager.join(b);
+        TournamentManager.join(c);
+        check(src, "tournament.joined", TournamentManager.current().participants.size() == 3, null);
+        TournamentManager.start(src);
+        check(src, "tournament.bracket4", TournamentManager.current().bracketSize == 4, "taille=" + TournamentManager.current().bracketSize);
+        TournamentManager.startRound(src);
+        Scheduler.later(20 * 9, () -> forceTournamentMatches(src, "round1"));
+        Scheduler.later(20 * 14, () -> {
+            check(src, "tournament.round2_ready", TournamentManager.current().currentRound == 1 && !TournamentManager.current().roundActive, null);
+            TournamentManager.startRound(src);
+        });
+        Scheduler.later(20 * 22, () -> forceTournamentMatches(src, "final"));
+        Scheduler.later(20 * 28, () -> {
+            fr.cobblepulse.data.TournamentData t = TournamentManager.current();
+            check(src, "tournament.finished", "FINISHED".equals(t.state) && t.winnerUuid != null, "etat=" + t.state);
+            if (t.winnerUuid != null) {
+                PlayerData w = PlayerDataManager.getIfLoaded(UUID.fromString(t.winnerUuid));
+                check(src, "tournament.winner_stats", w != null && w.tournamentsWon == 1 && w.tournamentMatchWins >= 1, null);
+                check(src, "tournament.rewards_pending", w != null && fr.cobblepulse.tournament.RewardManager.pendingCount(w) == 1, null);
+                check(src, "tournament.winner_rank", t.winnerUuid.equals(fr.cobblepulse.storage.StateManager.get().tournamentWinnerUuid), null);
+            }
+            int placed = 0;
+            for (fr.cobblepulse.data.TournamentData.Participant p : t.participants.values()) if (p.placementLo > 0) placed++;
+            check(src, "tournament.placements", placed == 3, placed + "/3");
+            check(src, "clan.pvp_stats", ca.pvpWins + ca.pvpLosses >= 1, "TestAlpha " + ca.pvpWins + "V/" + ca.pvpLosses + "D");
+            fr.cobblepulse.data.WarData war = fr.cobblepulse.clan.WarManager.activeWar(ca);
+            check(src, "clan.war_points", war != null && war.attackerPoints + war.defenderPoints >= 1,
+                    war == null ? "-" : war.attackerPoints + "-" + war.defenderPoints);
+            if (war != null) {
+                ca.influence = 100;
+                cb.influence = 200;
+                war.endsAt = TimeFmt.now();
+                fr.cobblepulse.clan.WarManager.resolve(war);
+                check(src, "clan.war_resolved", war.finished && (war.winnerId == null || war.stolenInfluence >= 10), "vol=" + war.stolenInfluence);
+            }
+            fr.cobblepulse.clan.ClanManager.inventory(ca).setItem(0, ItemStack.EMPTY);
+            fr.cobblepulse.clan.ClanManager.disband(a);
+            fr.cobblepulse.clan.ClanManager.disband(b);
+            check(src, "clan.disband", fr.cobblepulse.clan.ClanManager.clanOf(a.getUUID()) == null && fr.cobblepulse.clan.ClanManager.clanOf(c.getUUID()) == null, null);
+            TournamentManager.removeArena("selftest");
+            fr.cobblepulse.tournament.RewardManager.chest("first").setItem(0, ItemStack.EMPTY);
+        });
+        check(src, "tournament.scheduled", true, "resultats dans ~30s");
+        return 1;
+    }
+
+    private static void forceTournamentMatches(CommandSourceStack src, String label) {
+        int n = 0;
+        for (MatchService.Match m : new ArrayList<>(TournamentManager.running().keySet())) {
+            if (m.battleId != null && CobblemonBridge.battleActive(m.battleId)) {
+                CobblemonBridge.forceWin(m.battleId, "p1");
+                n++;
+            }
+        }
+        check(src, "tournament.match_" + label, n == 1, n + " combat(s) en cours");
+    }
+
+    /** Apres redemarrage : verifie que les donnees du test de combat ont ete persistees. */
+    public static int persisted(CommandSourceStack src) {
+        UUID challenger = UUID.nameUUIDFromBytes("cp-challenger".getBytes(StandardCharsets.UTF_8));
+        PlayerDataManager.with(challenger, "CPChallenger", d -> {
+            PlayerData.BadgeRecord rec = d.badges.get("champion_8");
+            check(src, "persist.badge", rec != null && !rec.challengerTeam.isEmpty() && rec.turns >= 0,
+                    rec == null ? "badge absent" : rec.challengerTeam + " / " + rec.holderTeam);
+            check(src, "persist.audit", d.audit.size() >= 2, d.audit.size() + " entrees");
+            check(src, "persist.stats", d.leagueWins >= 2, "victoires=" + d.leagueWins);
+        });
+        PostData post = LeagueManager.post("champion_8");
+        check(src, "persist.league", post != null && post.types.contains("electric") && post.tpHolder != null, null);
+        check(src, "persist.tournament", TournamentManager.current() == null || "FINISHED".equals(TournamentManager.current().state),
+                TournamentManager.current() == null ? "aucun" : TournamentManager.current().state);
+        return 1;
+    }
+
     public static int report(CommandSourceStack src) {
         int fail = 0;
         for (String l : REPORT) {

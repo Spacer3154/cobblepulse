@@ -1,7 +1,0 @@
-# Commandes console executees apres le demarrage du serveur de test
-cobblepulse selftest
-sleep 5
-cobblepulse selftest battle
-sleep 45
-cobblepulse selftest report
-cobblepulse reload

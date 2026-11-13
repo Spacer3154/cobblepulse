@@ -50,62 +50,77 @@ open(os.path.join(SRV, "eula.txt"), "w").write("eula=true\n")
 open(os.path.join(SRV, "server.properties"), "w").write(
     "online-mode=false\nview-distance=4\nsimulation-distance=4\nspawn-protection=0\nmax-tick-time=-1\nlevel-seed=cobblepulse\nsync-chunk-writes=false\n")
 
-commands = [l.strip() for l in open("ci/smoke_commands.txt") if l.strip() and not l.startswith("#")]
-proc = subprocess.Popen(["java", "-Xmx5G", "-Dcobblepulse.selftest=true", "-jar", "server.jar", "nogui"], cwd=SRV, stdin=subprocess.PIPE,
-                        stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, bufsize=1)
-lines = queue.Queue()
-logf = open(os.path.join(OUT, "server-console.log"), "w")
+def run_server(label, commands):
+    log("===== run %s =====" % label)
+    proc = subprocess.Popen(["java", "-Xmx5G", "-Dcobblepulse.selftest=true", "-jar", "server.jar", "nogui"], cwd=SRV,
+                            stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, bufsize=1)
+    lines = queue.Queue()
+    logf = open(os.path.join(OUT, "server-%s.log" % label), "w")
 
+    def reader():
+        for line in proc.stdout:
+            logf.write(line)
+            logf.flush()
+            lines.put(line)
+        lines.put(None)
 
-def reader():
-    for line in proc.stdout:
-        logf.write(line)
-        logf.flush()
-        lines.put(line)
-    lines.put(None)
+    threading.Thread(target=reader, daemon=True).start()
 
+    def wait_for(token, timeout):
+        end = time.time() + timeout
+        while time.time() < end:
+            try:
+                line = lines.get(timeout=1)
+            except queue.Empty:
+                continue
+            if line is None:
+                return False
+            if token in line:
+                return True
+        return False
 
-threading.Thread(target=reader, daemon=True).start()
-
-
-def wait_for(token, timeout):
-    end = time.time() + timeout
-    while time.time() < end:
-        try:
-            line = lines.get(timeout=1)
-        except queue.Empty:
-            continue
-        if line is None:
-            return False
-        if token in line:
-            return True
-    return False
-
-
-ok = wait_for("Done (", 1200)
-log("server ready: %s" % ok)
-if ok:
-    for c in commands:
-        if c.startswith("sleep "):
-            time.sleep(float(c.split()[1]))
-            continue
-        log("> " + c)
-        proc.stdin.write(c + "\n")
+    ok = wait_for("Done (", 1200)
+    log("server ready: %s" % ok)
+    if ok:
+        for c in commands:
+            if c.startswith("sleep "):
+                time.sleep(float(c.split()[1]))
+                continue
+            log("> " + c)
+            proc.stdin.write(c + "\n")
+            proc.stdin.flush()
+            time.sleep(3)
+        time.sleep(5)
+    try:
+        proc.stdin.write("stop\n")
         proc.stdin.flush()
-        time.sleep(3)
-    time.sleep(5)
-try:
-    proc.stdin.write("stop\n")
-    proc.stdin.flush()
-except Exception:
-    pass
-try:
-    proc.wait(timeout=180)
-except subprocess.TimeoutExpired:
-    proc.kill()
-log("exit code %s" % proc.returncode)
+    except Exception:
+        pass
+    try:
+        proc.wait(timeout=180)
+    except subprocess.TimeoutExpired:
+        proc.kill()
+    logf.close()
+    for l in open(os.path.join(OUT, "server-%s.log" % label)):
+        if "SELFTEST SUMMARY" in l or "FAIL " in l:
+            log("[%s] %s" % (label, l.strip()))
+    log("exit code %s" % proc.returncode)
 
-dst = os.path.join(OUT, "server-config")
+
+FULL = ["cobblepulse selftest", "sleep 5", "cobblepulse selftest battle", "sleep 45",
+        "cobblepulse selftest tournament", "sleep 38", "cobblepulse selftest report", "cobblepulse reload"]
+CHECK = ["sleep 3", "cobblepulse selftest persisted", "sleep 5", "cobblepulse selftest report"]
+
+run_server("json-1", FULL)
+run_server("json-2", CHECK)
+shutil.copytree(os.path.join(SRV, "config", "cobblepulse"), os.path.join(OUT, "server-config-json"), dirs_exist_ok=True)
+if os.environ.get("CP_MYSQL") == "1":
+    open(os.path.join(SRV, "config", "cobblepulse", "storage.toml"), "w").write(
+        'mode = "mysql"\n[mysql]\nhost = "127.0.0.1"\nport = 3306\ndatabase = "cobblepulse"\nusername = "root"\npassword = "cobblepulse"\n')
+    run_server("mysql-1", FULL)
+    run_server("mysql-2", CHECK)
+
+dst = os.path.join(OUT, "server-config-final")
 if os.path.isdir(os.path.join(SRV, "config", "cobblepulse")):
     shutil.copytree(os.path.join(SRV, "config", "cobblepulse"), dst, dirs_exist_ok=True)
 for crash in glob.glob(os.path.join(SRV, "crash-reports", "*")):

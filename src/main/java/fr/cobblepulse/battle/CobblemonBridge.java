@@ -150,7 +150,7 @@ public final class CobblemonBridge {
         if (battleId == null) return;
         try {
             PokemonBattle b = BattleRegistry.INSTANCE.getBattle(battleId);
-            if (b != null && !b.getEnded()) b.end();
+            if (b != null && !b.getEnded()) b.stop();
         } catch (Throwable t) {
             CobblePulse.LOG.warn("[CobblePulse] Arret du combat {} impossible : {}", battleId, t.toString());
         }

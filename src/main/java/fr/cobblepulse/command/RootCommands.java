@@ -44,6 +44,8 @@ public final class RootCommands {
                 .then(literal("selftest").requires(Perms.adminReq(Perms.ADMIN))
                         .executes(ctx -> SelfTest.basic(ctx.getSource()))
                         .then(literal("battle").executes(ctx -> SelfTest.battle(ctx.getSource())))
+                        .then(literal("tournament").executes(ctx -> SelfTest.tournament(ctx.getSource())))
+                        .then(literal("persisted").executes(ctx -> SelfTest.persisted(ctx.getSource())))
                         .then(literal("report").executes(ctx -> SelfTest.report(ctx.getSource()))))
                 .then(literal("payinfluence").requires(Perms.adminReq(Perms.ADMIN)).executes(ctx -> {
                     ClanManager.payInfluence();
