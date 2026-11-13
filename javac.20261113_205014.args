@@ -1,0 +1,6 @@
+-d
+/tmp/jc
+-proc:none
+-Xmaxerrs
+2000
+@/tmp/srcs.txt

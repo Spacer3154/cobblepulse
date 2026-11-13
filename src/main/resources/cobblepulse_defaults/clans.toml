@@ -1,0 +1,31 @@
+# =====================================================================
+#  CobblePulse - Clans (aucun claim de territoire)
+# =====================================================================
+
+name_min_length = 3
+name_max_length = 16
+tag_min_length = 2
+tag_max_length = 5
+max_members = 30
+# Mode a la creation : OPEN, INVITE_ONLY ou CLOSED
+default_mode = "INVITE_ONLY"
+invite_expiry_minutes = 10
+announce_creation = true
+
+# Inventaire partage : 27 emplacements, 54 avec cobblepulse.clan.inventory.expand (VIP)
+inventory_base_slots = 27
+inventory_vip_slots = 54
+
+# Tag de chat expose via le placeholder %cobblepulse:clan_tag% (ShadowChat).
+# %color% = couleur du clan (VIP avec cobblepulse.clan.chat.color) sinon default_tag_color
+tag_format = "&8[%color%%tag%&8] "
+default_tag_color = "&7"
+
+# Nombre minimal de tours pour comptabiliser un combat PvP inter-clans
+pvp_stats_min_turns = 1
+
+[influence]
+# Influence quotidienne generee pour son clan par un membre titulaire de la Ligue
+champion_per_day = 10
+elite_per_day = 25
+master_per_day = 50

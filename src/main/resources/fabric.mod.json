@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "cobblepulse",
+  "version": "${version}",
+  "name": "CobblePulse",
+  "description": "Clans & Guerres d'Influence, Ligue PvP (8 Champions, Conseil 4, Maitre) et Tournois competitifs pour Cobblemon.",
+  "authors": ["CobblePulse"],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/cobblepulse/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["fr.cobblepulse.CobblePulse"]
+  },
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "minecraft": "~1.21.1",
+    "java": ">=21",
+    "fabric-api": "*",
+    "cobblemon": ">=1.8.0"
+  },
+  "recommends": {
+    "luckperms": "*",
+    "placeholder-api": "*"
+  },
+  "suggests": {
+    "shadowchat": "*"
+  }
+}
