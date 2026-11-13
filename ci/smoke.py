@@ -51,7 +51,7 @@ open(os.path.join(SRV, "server.properties"), "w").write(
     "online-mode=false\nview-distance=4\nsimulation-distance=4\nspawn-protection=0\nmax-tick-time=-1\nlevel-seed=cobblepulse\nsync-chunk-writes=false\n")
 
 commands = [l.strip() for l in open("ci/smoke_commands.txt") if l.strip() and not l.startswith("#")]
-proc = subprocess.Popen(["java", "-Xmx5G", "-jar", "server.jar", "nogui"], cwd=SRV, stdin=subprocess.PIPE,
+proc = subprocess.Popen(["java", "-Xmx5G", "-Dcobblepulse.selftest=true", "-jar", "server.jar", "nogui"], cwd=SRV, stdin=subprocess.PIPE,
                         stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, bufsize=1)
 lines = queue.Queue()
 logf = open(os.path.join(OUT, "server-console.log"), "w")

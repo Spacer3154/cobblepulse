@@ -121,5 +121,29 @@ if cob:
         for c in targets:
             r = subprocess.run(["javap", "-cp", jar, c], capture_output=True, text=True)
             fh.write(f"##### {c}\n{r.stdout}{r.stderr}\n")
+    # Corps des methodes de fin de combat + gestion des deconnexions
+    r = subprocess.run(["javap", "-c", "-p", "-cp", jar, "com.cobblemon.mod.common.api.battles.model.PokemonBattle"], capture_output=True, text=True)
+    body = r.stdout
+    out = []
+    for sig in ("public final void end()", "public final void stop()"):
+        i = body.find(sig)
+        if i >= 0:
+            j = body.find("\n\n", i)
+            out.append(body[i:j if j > 0 else i + 6000][:6000])
+    with open(os.path.join(OUT, "battle_end_stop.txt"), "w") as fh:
+        fh.write("\n\n".join(out))
+    hits = []
+    for n in names:
+        if not n.endswith(".class") or not n.startswith("com/cobblemon/"):
+            continue
+        data = z.read(n)
+        if b"getBattleByParticipatingPlayer" in data and (b"isDisconnected" in data or b"Disconnect" in data or b"LOGOUT" in data or b"logout" in data.lower()):
+            hits.append(n)
+    with open(os.path.join(OUT, "disconnect_classes.txt"), "w") as fh:
+        fh.write("\n".join(hits))
+    for n in hits[:6]:
+        r = subprocess.run(["javap", "-c", "-p", "-cp", jar, n[:-6].replace("/", ".")], capture_output=True, text=True)
+        with open(os.path.join(OUT, "disconnect_" + n.split("/")[-1] + ".txt"), "w") as fh:
+            fh.write(r.stdout[:60000])
     os.remove(jar)
 print("discover done")

@@ -246,7 +246,7 @@ public final class LeagueGuis {
             LeagueManager.setOpen(p, !p.open);
             openPostEditor(pl, p);
         });
-        gui.button(14, ItemBuilder.of(Items.RED_BED).name("&eTP Titulaire ici").lore("&7Actuel : &f" + (p.tpHolder == null ? "-" : p.tpHolder.pretty()),
+        gui.set(14, ItemBuilder.of(Items.RED_BED).name("&eTP Titulaire ici").lore("&7Actuel : &f" + (p.tpHolder == null ? "-" : p.tpHolder.pretty()),
                 "&8Clic droit : s'y téléporter").build(), (pl, c) -> {
             if (c.right() && p.tpHolder != null) {
                 p.tpHolder.teleport(pl);
@@ -255,7 +255,7 @@ public final class LeagueGuis {
             LeagueManager.setTp(p, true, Loc.of(pl));
             openPostEditor(pl, p);
         });
-        gui.button(15, ItemBuilder.of(Items.BLUE_BED).name("&eTP Challenger ici").lore("&7Actuel : &f" + (p.tpChallenger == null ? "-" : p.tpChallenger.pretty()),
+        gui.set(15, ItemBuilder.of(Items.BLUE_BED).name("&eTP Challenger ici").lore("&7Actuel : &f" + (p.tpChallenger == null ? "-" : p.tpChallenger.pretty()),
                 "&8Clic droit : s'y téléporter").build(), (pl, c) -> {
             if (c.right() && p.tpChallenger != null) {
                 p.tpChallenger.teleport(pl);
