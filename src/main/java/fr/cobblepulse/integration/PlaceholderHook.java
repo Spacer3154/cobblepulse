@@ -28,6 +28,13 @@ final class PlaceholderHook {
         });
     }
 
+    /** Texte LuckPerms colore (&, &#RRGGBB, <#RRGGBB>) suivi d'un espace s'il n'est pas vide. */
+    private static Component metaComponent(String s) {
+        if (s == null || s.isBlank()) return Component.empty();
+        String v = s.endsWith(" ") ? s : s + " ";
+        return TextUtil.legacy(v);
+    }
+
     static void register() {
         reg("clan_tag", ClanManager::formattedTag);
         reg("clan_name", p -> {
@@ -57,6 +64,8 @@ final class PlaceholderHook {
             out.append(ClanManager.formattedTag(p));
             return out;
         });
+        reg("lp_prefix", p -> metaComponent(LuckPermsBridge.meta(p, true)));
+        reg("lp_suffix", p -> metaComponent(LuckPermsBridge.meta(p, false)));
         reg("badges", p -> Component.literal(String.valueOf(PlayerDataManager.online(p).badges.size())));
         reg("tournament_winner", p -> p.getUUID().toString().equals(StateManager.get().tournamentWinnerUuid)
                 ? TextUtil.legacy(Cfg.tournament.str("winner_prefix", "&e[Vainqueur Tournoi] ")) : Component.empty());

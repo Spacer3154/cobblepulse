@@ -25,6 +25,13 @@ final class LuckPermsHook {
         return t == Tristate.UNDEFINED ? null : t.asBoolean();
     }
 
+    static String meta(ServerPlayer p, boolean prefix) {
+        User user = LuckPermsProvider.get().getUserManager().getUser(p.getUUID());
+        if (user == null) return null;
+        var meta = user.getCachedData().getMetaData();
+        return prefix ? meta.getPrefix() : meta.getSuffix();
+    }
+
     static void grant(UUID uuid, List<String> perms, String prefix, int priority, String group) {
         LuckPerms lp = LuckPermsProvider.get();
         lp.getUserManager().modifyUser(uuid, user -> {

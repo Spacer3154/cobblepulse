@@ -29,6 +29,17 @@ public final class LuckPermsBridge {
         }
     }
 
+    /** Prefixe (true) ou suffixe (false) LuckPerms actif du joueur, ou null. */
+    public static String meta(ServerPlayer p, boolean prefix) {
+        if (!PRESENT || p == null) return null;
+        try {
+            return LuckPermsHook.meta(p, prefix);
+        } catch (Throwable t) {
+            warnOnce(t);
+            return null;
+        }
+    }
+
     /** Accorde des permissions + prefixe (+ groupe optionnel). Fonctionne joueur hors-ligne. */
     public static void grant(UUID uuid, List<String> perms, String prefix, int priority, String group) {
         if (!PRESENT || uuid == null) return;
