@@ -44,10 +44,15 @@ grace_seconds = 60
 
 [ranks]
 # Prefixes LuckPerms appliques/retires automatiquement (%type% / %types%)
+# Codes acceptes : &a, &#RRGGBB et <#RRGGBB>texte</#>
 champion_prefix = "&6[Champion - %type%] "
 elite_prefix = "&5[Conseil 4 - %types%] "
 master_prefix = "&c&l[Maître] "
 prefix_priority = 100
+# true : le grade est ajoute comme prefixe LuckPerms (%luckperms:prefix%).
+# false : seules les permissions sont donnees ; le grade s'affiche via %cobblepulse:league_grade%
+#         ou %cobblepulse:chat_prefix% (recommande avec ShadowChat).
+luckperms_prefix = true
 # Groupes LuckPerms optionnels ajoutes au titulaire (laisser vide pour ne rien ajouter)
 champion_group = ""
 elite_group = ""

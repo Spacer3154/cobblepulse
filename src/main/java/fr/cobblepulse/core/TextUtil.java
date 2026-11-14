@@ -21,6 +21,18 @@ public final class TextUtil {
         int n = input.length();
         while (i < n) {
             char c = input.charAt(i);
+            if (c == '<' && i + 9 <= n && input.charAt(i + 1) == '#' && input.charAt(i + 8) == '>' && isHex(input, i + 2, 6)) {
+                flush(root, buf, style);
+                style = Style.EMPTY.withColor(TextColor.fromRgb(Integer.parseInt(input.substring(i + 2, i + 8), 16)));
+                i += 9;
+                continue;
+            }
+            if (c == '<' && input.startsWith("</#>", i)) {
+                flush(root, buf, style);
+                style = Style.EMPTY;
+                i += 4;
+                continue;
+            }
             if ((c == '&' || c == '§') && i + 1 < n) {
                 char code = Character.toLowerCase(input.charAt(i + 1));
                 if (code == '#' && i + 8 <= n && isHex(input, i + 2, 6)) {
@@ -68,7 +80,7 @@ public final class TextUtil {
     /** Retire les codes couleur d'une chaine. */
     public static String strip(String input) {
         if (input == null) return "";
-        return input.replaceAll("(?i)[&§]#[0-9a-f]{6}", "").replaceAll("(?i)[&§][0-9a-fk-or]", "");
+        return input.replaceAll("(?i)<#[0-9a-f]{6}>|</#>", "").replaceAll("(?i)[&§]#[0-9a-f]{6}", "").replaceAll("(?i)[&§][0-9a-fk-or]", "");
     }
 
     /** Version non italique (utile pour les noms/lores d'items). */

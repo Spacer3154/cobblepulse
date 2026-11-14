@@ -66,7 +66,7 @@ public final class SelfTest {
         items.add(fr.cobblepulse.core.ItemBuilder.of(Items.STONE).name("&aTest").build());
         List<ItemStack> back = ItemSerial.decode(ItemSerial.encode(items));
         check(src, "items.serialization", back.size() == 3 && back.get(0).getCount() == 7 && back.get(1).isEmpty() && back.get(2).is(Items.STONE), null);
-        check(src, "text.legacy", TextUtil.legacy("&aA&#FF0000B&lC").getString().equals("ABC"), null);
+        check(src, "text.legacy", TextUtil.legacy("&aA&#FF0000B&lC<#55FFFF>D</#>E").getString().equals("ABCDE"), null);
         check(src, "integration.luckperms", true, LuckPermsBridge.present() ? "present" : "absent");
         check(src, "integration.placeholder", true, FabricLoader.getInstance().isModLoaded("placeholder-api") ? "present" : "absent");
         check(src, "environment", true, FabricLoader.getInstance().getEnvironmentType() == EnvType.SERVER ? "serveur dedie" : "client");

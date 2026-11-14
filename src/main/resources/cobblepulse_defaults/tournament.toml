@@ -18,6 +18,8 @@ return_players_after_match = true
 # Grade temporaire du vainqueur (LuckPerms)
 winner_prefix = "&e[Vainqueur Tournoi] "
 winner_prefix_priority = 90
+# false : pas de prefixe LuckPerms, affichage via %cobblepulse:tournament_winner% ou %cobblepulse:chat_prefix%
+winner_luckperms_prefix = true
 winner_group = ""
 # Retrait du grade du precedent vainqueur : "start" (creation du tournoi suivant) ou "end" (fin du suivant)
 remove_winner_rank_on = "start"

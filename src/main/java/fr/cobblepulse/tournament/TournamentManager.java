@@ -458,7 +458,8 @@ public final class TournamentManager {
         st.tournamentWinnerUuid = uuid.toString();
         st.tournamentWinnerName = name;
         StateManager.save();
-        LuckPermsBridge.grant(uuid, List.of(Perms.TOURNAMENT_WINNER), Cfg.tournament.str("winner_prefix", "&e[Vainqueur Tournoi] "),
+        LuckPermsBridge.grant(uuid, List.of(Perms.TOURNAMENT_WINNER),
+                Cfg.tournament.b("winner_luckperms_prefix", true) ? Cfg.tournament.str("winner_prefix", "&e[Vainqueur Tournoi] ") : null,
                 Cfg.tournament.i("winner_prefix_priority", 90), Cfg.tournament.str("winner_group", ""));
     }
 

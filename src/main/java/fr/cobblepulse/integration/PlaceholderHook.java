@@ -47,6 +47,16 @@ final class PlaceholderHook {
             LeagueData.PostData post = LeagueManager.postOf(p.getUUID());
             return post == null ? Component.empty() : TextUtil.legacy(LeagueManager.prefix(post));
         });
+        reg("chat_prefix", p -> {
+            net.minecraft.network.chat.MutableComponent out = Component.empty();
+            LeagueData.PostData post = LeagueManager.postOf(p.getUUID());
+            if (post != null) out.append(TextUtil.legacy(LeagueManager.prefix(post)));
+            if (p.getUUID().toString().equals(StateManager.get().tournamentWinnerUuid)) {
+                out.append(TextUtil.legacy(Cfg.tournament.str("winner_prefix", "&e[Vainqueur Tournoi] ")));
+            }
+            out.append(ClanManager.formattedTag(p));
+            return out;
+        });
         reg("badges", p -> Component.literal(String.valueOf(PlayerDataManager.online(p).badges.size())));
         reg("tournament_winner", p -> p.getUUID().toString().equals(StateManager.get().tournamentWinnerUuid)
                 ? TextUtil.legacy(Cfg.tournament.str("winner_prefix", "&e[Vainqueur Tournoi] ")) : Component.empty());

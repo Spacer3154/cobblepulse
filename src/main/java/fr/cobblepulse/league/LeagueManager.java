@@ -197,7 +197,7 @@ public final class LeagueManager {
     private static void grantRole(PostData p) {
         UUID u = holder(p);
         if (u == null) return;
-        p.appliedPrefix = prefix(p);
+        p.appliedPrefix = Cfg.league.b("ranks.luckperms_prefix", true) ? prefix(p) : null;
         LuckPermsBridge.grant(u, rolePerms(p), p.appliedPrefix, Cfg.league.i("ranks.prefix_priority", 100), group(p));
     }
 
