@@ -51,6 +51,7 @@ public final class TournamentManager {
             if (t.thirdPlace != null && "RUNNING".equals(t.thirdPlace.status)) t.thirdPlace.status = "PENDING";
         }
         Scheduler.repeat(40, 40, TournamentManager::dispatch);
+        syncWinnerGroup();
     }
 
     public static void save() {
@@ -453,14 +454,34 @@ public final class TournamentManager {
         save();
     }
 
+    private static String winnerMode() {
+        return Cfg.tournament.str("winner_luckperms_mode", "group").toLowerCase(Locale.ROOT).trim();
+    }
+
+    public static String winnerGroup() {
+        return Cfg.tournament.str("winner_group_name", "cp_vainqueur_tournoi").toLowerCase(Locale.ROOT);
+    }
+
+    public static void syncWinnerGroup() {
+        if (!winnerMode().equals("group")) return;
+        LuckPermsBridge.syncGroup(winnerGroup(), "Vainqueur Tournoi", Cfg.tournament.str("winner_prefix", "&e[Vainqueur Tournoi] "),
+                Cfg.tournament.i("winner_prefix_priority", 90), List.of(Perms.TOURNAMENT_WINNER), Cfg.tournament.str("winner_group", ""));
+    }
+
     private static void grantWinnerRank(UUID uuid, String name) {
         MiscState st = StateManager.get();
         st.tournamentWinnerUuid = uuid.toString();
         st.tournamentWinnerName = name;
         StateManager.save();
-        LuckPermsBridge.grant(uuid, List.of(Perms.TOURNAMENT_WINNER),
-                Cfg.tournament.b("winner_luckperms_prefix", true) ? Cfg.tournament.str("winner_prefix", "&e[Vainqueur Tournoi] ") : null,
-                Cfg.tournament.i("winner_prefix_priority", 90), Cfg.tournament.str("winner_group", ""));
+        switch (winnerMode()) {
+            case "group" -> {
+                syncWinnerGroup();
+                LuckPermsBridge.grant(uuid, List.of(), null, 0, winnerGroup());
+            }
+            case "prefix" -> LuckPermsBridge.grant(uuid, List.of(Perms.TOURNAMENT_WINNER), Cfg.tournament.str("winner_prefix", "&e[Vainqueur Tournoi] "),
+                    Cfg.tournament.i("winner_prefix_priority", 90), Cfg.tournament.str("winner_group", ""));
+            default -> LuckPermsBridge.grant(uuid, List.of(Perms.TOURNAMENT_WINNER), null, 0, Cfg.tournament.str("winner_group", ""));
+        }
     }
 
     /** Retire le grade temporaire [Vainqueur Tournoi] du dernier vainqueur. */
@@ -468,9 +489,10 @@ public final class TournamentManager {
         MiscState st = StateManager.get();
         if (st.tournamentWinnerUuid == null) return;
         try {
-            LuckPermsBridge.revoke(UUID.fromString(st.tournamentWinnerUuid), List.of(Perms.TOURNAMENT_WINNER),
-                    Cfg.tournament.str("winner_prefix", "&e[Vainqueur Tournoi] "), Cfg.tournament.i("winner_prefix_priority", 90),
-                    Cfg.tournament.str("winner_group", ""));
+            UUID u = UUID.fromString(st.tournamentWinnerUuid);
+            String extra = Cfg.tournament.str("winner_group", "");
+            LuckPermsBridge.revoke(u, List.of(Perms.TOURNAMENT_WINNER), Cfg.tournament.str("winner_prefix", "&e[Vainqueur Tournoi] "),
+                    Cfg.tournament.i("winner_prefix_priority", 90), extra.isBlank() ? winnerGroup() : extra + "," + winnerGroup());
         } catch (IllegalArgumentException ignored) {
         }
         st.tournamentWinnerUuid = null;

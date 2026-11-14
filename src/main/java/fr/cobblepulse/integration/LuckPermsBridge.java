@@ -29,6 +29,34 @@ public final class LuckPermsBridge {
         }
     }
 
+    public static void update(UUID uuid, List<String> rmPerms, String rmPrefix, int rmPriority, String rmGroups,
+                              List<String> addPerms, String addPrefix, int addPriority, String addGroups) {
+        if (!PRESENT || uuid == null) return;
+        try {
+            LuckPermsHook.update(uuid, rmPerms, rmPrefix, rmPriority, rmGroups, addPerms, addPrefix, addPriority, addGroups);
+        } catch (Throwable t) {
+            warnOnce(t);
+        }
+    }
+
+    public static java.util.concurrent.CompletableFuture<String> describe(UUID uuid, String group) {
+        if (!PRESENT) return java.util.concurrent.CompletableFuture.completedFuture("luckperms absent");
+        try {
+            return LuckPermsHook.describe(uuid, group);
+        } catch (Throwable t) {
+            return java.util.concurrent.CompletableFuture.completedFuture("erreur " + t);
+        }
+    }
+
+    public static void syncGroup(String name, String display, String prefix, int priority, List<String> perms, String parent) {
+        if (!PRESENT || name == null || name.isBlank()) return;
+        try {
+            LuckPermsHook.syncGroup(name, display, prefix, priority, perms, parent);
+        } catch (Throwable t) {
+            warnOnce(t);
+        }
+    }
+
     /** Prefixe (true) ou suffixe (false) LuckPerms actif du joueur, ou null. */
     public static String meta(ServerPlayer p, boolean prefix) {
         if (!PRESENT || p == null) return null;

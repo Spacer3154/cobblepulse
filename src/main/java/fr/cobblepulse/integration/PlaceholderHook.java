@@ -57,8 +57,9 @@ final class PlaceholderHook {
         reg("chat_prefix", p -> {
             net.minecraft.network.chat.MutableComponent out = Component.empty();
             LeagueData.PostData post = LeagueManager.postOf(p.getUUID());
-            if (post != null) out.append(TextUtil.legacy(LeagueManager.prefix(post)));
-            if (p.getUUID().toString().equals(StateManager.get().tournamentWinnerUuid)) {
+            if (post != null && LeagueManager.rankMode().equals("none")) out.append(TextUtil.legacy(LeagueManager.prefix(post)));
+            if (Cfg.tournament.str("winner_luckperms_mode", "group").equalsIgnoreCase("none")
+                    && p.getUUID().toString().equals(StateManager.get().tournamentWinnerUuid)) {
                 out.append(TextUtil.legacy(Cfg.tournament.str("winner_prefix", "&e[Vainqueur Tournoi] ")));
             }
             out.append(ClanManager.formattedTag(p));

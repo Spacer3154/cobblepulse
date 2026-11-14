@@ -16,10 +16,12 @@ battle_format = "singles"
 return_players_after_match = true
 
 # Grade temporaire du vainqueur (LuckPerms)
+#  "group" (defaut) : groupe cp_vainqueur_tournoi cree automatiquement ; "prefix" : prefixe direct ; "none"
+winner_luckperms_mode = "group"
+winner_group_name = "cp_vainqueur_tournoi"
 winner_prefix = "&e[Vainqueur Tournoi] "
 winner_prefix_priority = 90
-# false : pas de prefixe LuckPerms, affichage via %cobblepulse:tournament_winner% ou %cobblepulse:chat_prefix%
-winner_luckperms_prefix = true
+# Groupe parent optionnel du groupe vainqueur
 winner_group = ""
 # Retrait du grade du precedent vainqueur : "start" (creation du tournoi suivant) ou "end" (fin du suivant)
 remove_winner_rank_on = "start"

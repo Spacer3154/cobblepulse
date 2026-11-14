@@ -76,6 +76,11 @@ public final class LeagueManager {
             }
         }
         data.posts = ordered;
+        // Groupes LuckPerms a jour + migration des anciens prefixes directs
+        for (PostData p : data.posts) {
+            syncGroup(p);
+            if (p.holderUuid != null && rankMode().equals("group")) migrateToGroup(p);
+        }
         save();
         Scheduler.repeat(20, 20, LeagueManager::tickSecond);
         Scheduler.repeat(20 * 30, 20L * 60 * Math.max(1, Cfg.league.i("inactivity.check_interval_minutes", 10)), LeagueManager::checkInactivity);
@@ -194,18 +199,72 @@ public final class LeagueManager {
         return List.of(roleNode(p), Perms.ARENA_SETTP, Perms.ARENA_TOGGLE);
     }
 
+    /** "group" (groupes LuckPerms, defaut), "prefix" (prefixe direct sur le joueur) ou "none". */
+    public static String rankMode() {
+        return Cfg.league.str("ranks.luckperms_mode", "group").toLowerCase(java.util.Locale.ROOT).trim();
+    }
+
+    /** Groupe LuckPerms du poste : cp_champion_1 ... cp_conseil4_1 ... cp_maitre. */
+    public static String groupName(PostData p) {
+        String base = Cfg.league.str("ranks.group_name_prefix", "cp_");
+        return (base + switch (kind(p)) {
+            case CHAMPION -> "champion_" + number(p);
+            case ELITE -> "conseil4_" + number(p);
+            case MASTER -> "maitre";
+        }).toLowerCase(java.util.Locale.ROOT);
+    }
+
+    private static int priority(PostData p) {
+        int base = Cfg.league.i("ranks.prefix_priority", 100);
+        return switch (kind(p)) {
+            case CHAMPION -> base;
+            case ELITE -> base + 10;
+            case MASTER -> base + 20;
+        };
+    }
+
+    /** Cree/met a jour le groupe LuckPerms du poste (prefixe avec le type actuel). */
+    public static void syncGroup(PostData p) {
+        if (!rankMode().equals("group")) return;
+        LuckPermsBridge.syncGroup(groupName(p), TextUtil.strip(grade(p)), prefix(p), priority(p), rolePerms(p), group(p));
+    }
+
+    private static String join(String a, String b) {
+        return (a == null || a.isBlank()) ? b : a + "," + b;
+    }
+
+    /** Migration vers les groupes : retire prefixe/permissions directs et ajoute le groupe, en une operation. */
+    private static void migrateToGroup(PostData p) {
+        UUID u = holder(p);
+        if (u == null) return;
+        LuckPermsBridge.update(u, rolePerms(p), p.appliedPrefix, priority(p), group(p), List.of(), null, 0, groupName(p));
+        p.appliedPrefix = null;
+    }
+
     private static void grantRole(PostData p) {
         UUID u = holder(p);
         if (u == null) return;
-        p.appliedPrefix = Cfg.league.b("ranks.luckperms_prefix", true) ? prefix(p) : null;
-        LuckPermsBridge.grant(u, rolePerms(p), p.appliedPrefix, Cfg.league.i("ranks.prefix_priority", 100), group(p));
+        switch (rankMode()) {
+            case "group" -> {
+                p.appliedPrefix = null;
+                syncGroup(p);
+                LuckPermsBridge.grant(u, List.of(), null, 0, groupName(p));
+            }
+            case "prefix" -> {
+                p.appliedPrefix = prefix(p);
+                LuckPermsBridge.grant(u, rolePerms(p), p.appliedPrefix, priority(p), group(p));
+            }
+            default -> {
+                p.appliedPrefix = null;
+                LuckPermsBridge.grant(u, rolePerms(p), null, 0, group(p));
+            }
+        }
     }
 
     private static void revokeRole(PostData p) {
         UUID u = holder(p);
         if (u == null) return;
-        LuckPermsBridge.revoke(u, rolePerms(p), p.appliedPrefix != null ? p.appliedPrefix : prefix(p),
-                Cfg.league.i("ranks.prefix_priority", 100), group(p));
+        LuckPermsBridge.revoke(u, rolePerms(p), p.appliedPrefix, priority(p), join(group(p), groupName(p)));
         p.appliedPrefix = null;
     }
 
@@ -249,10 +308,12 @@ public final class LeagueManager {
 
     public static void setTypes(PostData p, List<PokeType> types) {
         boolean held = p.holderUuid != null;
-        if (held) revokeRole(p);
+        boolean group = rankMode().equals("group");
+        if (held && !group) revokeRole(p);
         p.types = new ArrayList<>();
         for (PokeType t : types) p.types.add(t.id);
-        if (held) grantRole(p);
+        if (group) syncGroup(p);
+        else if (held) grantRole(p);
         save();
     }
 

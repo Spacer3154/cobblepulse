@@ -138,6 +138,11 @@ public final class SelfTest {
             PlayerData h = PlayerDataManager.getIfLoaded(holder.getUUID());
             check(src, "battle.no_cooldown_for_winner", PlayerDataManager.online(challenger).placeCooldownUntil == 0, null);
             check(src, "battle.loser_no_badge_cd", h != null, null);
+            String gname = LeagueManager.groupName(post);
+            Scheduler.later(40, () -> LuckPermsBridge.describe(challenger.getUUID(), gname).whenComplete((v, e) -> DataService.main(() ->
+                    check(src, "luckperms.group", v != null && v.contains(gname) && v.contains("Champion"), String.valueOf(v)))));
+            Scheduler.later(40, () -> LuckPermsBridge.describe(holder.getUUID(), gname).whenComplete((v, e) -> DataService.main(() ->
+                    check(src, "luckperms.group_removed", v != null && !v.split("\\|")[0].contains(gname), String.valueOf(v)))));
             // Deconnexion pendant un match : delai de grace puis forfait
             post.lastHolderChange = 0;
             LeagueManager.debugStart(post, holder, LeagueManager.ChallengeType.BADGE);
