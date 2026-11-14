@@ -506,7 +506,37 @@ public final class ClanManager {
     public static MutableComponent formattedTag(ServerPlayer p) {
         ClanData c = clanOf(p.getUUID());
         if (c == null) return Component.empty();
-        return TextUtil.legacy(tagString(c, Perms.vip(p, Perms.CLAN_CHAT_COLOR)));
+        MutableComponent tag = TextUtil.legacy(tagString(c, Perms.vip(p, Perms.CLAN_CHAT_COLOR)));
+        if (!Cfg.clans.b("chat_hover.enabled", true)) return tag;
+        MutableComponent hover = Component.empty();
+        List<String> lines = Cfg.clans.list("chat_hover.lines");
+        for (int i = 0; i < lines.size(); i++) {
+            if (i > 0) hover.append(Component.literal("\n"));
+            hover.append(TextUtil.legacy(fillClan(lines.get(i), c)));
+        }
+        net.minecraft.network.chat.Style st = net.minecraft.network.chat.Style.EMPTY
+                .withHoverEvent(new net.minecraft.network.chat.HoverEvent(net.minecraft.network.chat.HoverEvent.Action.SHOW_TEXT, hover));
+        String click = Cfg.clans.str("chat_hover.click_command", "/clan info %clan%");
+        if (!click.isBlank()) {
+            st = st.withClickEvent(new net.minecraft.network.chat.ClickEvent(net.minecraft.network.chat.ClickEvent.Action.RUN_COMMAND,
+                    fillClan(click, c)));
+        }
+        return Component.empty().setStyle(st).append(tag);
+    }
+
+    /** Variables : %clan% %tag% %leader% %members% %max% %influence% %rank% %mode% %pvp_wins% %pvp_losses% %war_wins% %war_losses% %war_draws% %war% */
+    public static String fillClan(String s, ClanData c) {
+        ClanData.ClanMember leader = c.members.get(c.leader);
+        fr.cobblepulse.data.WarData w = WarManager.activeWar(c);
+        String war = w == null ? Cfg.clans.str("chat_hover.no_war", "&7Aucune")
+                : "&c" + (w.attackerId.equals(c.id) ? w.defenderName : w.attackerName) + " &7(" + WarManager.score(w, c) + ")";
+        return s.replace("%clan%", c.name).replace("%tag%", c.tag).replace("%leader%", leader == null ? "?" : leader.name)
+                .replace("%members%", String.valueOf(c.members.size())).replace("%max%", String.valueOf(maxMembers()))
+                .replace("%influence%", String.valueOf(c.influence)).replace("%rank%", String.valueOf(rank(c)))
+                .replace("%mode%", modeLabel(mode(c))).replace("%pvp_wins%", String.valueOf(c.pvpWins))
+                .replace("%pvp_losses%", String.valueOf(c.pvpLosses)).replace("%war_wins%", String.valueOf(c.warWins))
+                .replace("%war_losses%", String.valueOf(c.warLosses)).replace("%war_draws%", String.valueOf(c.warDraws))
+                .replace("%war%", war);
     }
 
     public static String tagString(ClanData c, boolean colored) {
