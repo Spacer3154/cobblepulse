@@ -1,0 +1,119 @@
+== cobblemon impactdev fabric
+1.2.0+1.19.2
+1.3.0+1.19.2
+1.4.0+1.20.1
+1.4.1+1.20.1
+1.5.0+1.20.1
+1.5.1+1.20.1
+1.5.2+1.20.1
+1.6.0+1.21.1-SNAPSHOT
+1.6.0+1.21.1
+1.6.1+1.21.1-SNAPSHOT
+1.6.1+1.21.1
+1.7.0+1.21.1-SNAPSHOT
+1.7.0+1.21.1
+1.7.1+1.21.1-SNAPSHOT
+1.7.1+1.21.1
+1.7.2+1.21.1
+1.7.3+1.21.1-SNAPSHOT
+1.7.3+1.21.1
+1.8.0+1.21.1-SNAPSHOT
+1.8.0+1.21.1
+1.8.1+1.21.1-SNAPSHOT
+1.8.1+1.21.1
+1.8.2+1.21.1-SNAPSHOT
+1.8.2+1.21.1
+1.8.3+1.21.1-SNAPSHOT
+1.8.3+1.21.1
+1.8.4+1.21.1-SNAPSHOT
+1.8.4+1.21.1
+1.8.5+1.21.1-SNAPSHOT
+== fabric-api 1.21.1
+0.116.14+1.21.1
+0.116.15+1.21.1
+0.116.16+1.21.1
+0.116.17+1.21.1
+0.116.18+1.21.1
+== fabric-loader
+0.19.0
+0.19.1
+0.19.2
+0.19.3
+0.19.4
+0.19.5
+0.20.0
+0.20.1
+== fabric-language-kotlin
+1.13.10+kotlin.2.3.20
+1.13.11+kotlin.2.3.21
+1.13.12+kotlin.2.4.0
+1.13.13+kotlin.2.4.10
+1.13.14+kotlin.2.4.20
+1.14.0+kotlin.2.4.20
+1.14.1+kotlin.2.4.20
+1.14.2+kotlin.2.4.21
+== fabric-loom
+1.20.0-alpha.16
+1.20.0-alpha.17
+1.20.0-alpha.18
+1.20.0-alpha.19
+1.19.4
+1.20.0-alpha.21
+1.20.0-alpha.22
+1.20.0-alpha.23
+1.20.0-alpha.24
+1.20.0-alpha.25
+1.20.0-alpha.27
+1.20.0-alpha.28
+1.20.0-alpha.29
+1.20.0-alpha.30
+1.20.0-alpha.31
+== placeholder-api
+2.6.4+1.21.5
+2.7.0+1.21.6
+2.7.1+1.21.6
+2.7.2+1.21.8
+2.8.0-rc.1+1.21.9
+2.8.0+1.21.9
+2.8.1+1.21.10
+2.8.2+1.21.10
+== luckperms api
+5.1
+5.2
+5.3
+5.4
+5.5
+== modrinth cobblemon
+1.8.4F | id=PdOzYHKU | 2026-10-27T10:10:48.752181Z | https://cdn.modrinth.com/data/MdwFAVRL/versions/PdOzYHKU/Cobblemon-fabric-1.8.4%2B1.21.1.jar
+1.8.3F | id=IgUZQKm8 | 2026-10-25T00:36:25.825963Z | https://cdn.modrinth.com/data/MdwFAVRL/versions/IgUZQKm8/Cobblemon-fabric-1.8.3%2B1.21.1.jar
+1.8.2 | id=GJ2a1b8O | 2026-10-11T01:37:22.732220Z | https://cdn.modrinth.com/data/MdwFAVRL/versions/GJ2a1b8O/Cobblemon-fabric-1.8.2%2B1.21.1.jar
+1.8.1 | id=gBW3vLC7 | 2026-09-12T23:52:35.907436Z | https://cdn.modrinth.com/data/MdwFAVRL/versions/gBW3vLC7/Cobblemon-fabric-1.8.1%2B1.21.1.jar
+1.8.0 | id=YgmyyFcs | 2026-09-06T01:30:57.678267Z | https://cdn.modrinth.com/data/MdwFAVRL/versions/YgmyyFcs/Cobblemon-fabric-1.8.0%2B1.21.1.jar
+1.7.3 | id=kF7CvxTo | 2026-01-31T01:14:51.955679Z | https://cdn.modrinth.com/data/MdwFAVRL/versions/kF7CvxTo/Cobblemon-fabric-1.7.3%2B1.21.1.jar
+== modrinth fabric-api
+0.116.18+1.21.1 | id=5SwzqWUu | 2026-11-09T15:02:24.365327Z | https://cdn.modrinth.com/data/P7dR8mSH/versions/5SwzqWUu/fabric-api-0.116.18%2B1.21.1.jar
+0.116.17+1.21.1 | id=Mys3P7lK | 2026-09-01T16:40:04.373428Z | https://cdn.modrinth.com/data/P7dR8mSH/versions/Mys3P7lK/fabric-api-0.116.17%2B1.21.1.jar
+0.116.16+1.21.1 | id=fpB2VatZ | 2026-09-01T10:29:57.072338Z | https://cdn.modrinth.com/data/P7dR8mSH/versions/fpB2VatZ/fabric-api-0.116.16%2B1.21.1.jar
+0.116.15+1.21.1 | id=Nlt8gI9z | 2026-07-28T08:41:22.864336Z | https://cdn.modrinth.com/data/P7dR8mSH/versions/Nlt8gI9z/fabric-api-0.116.15%2B1.21.1.jar
+0.116.14+1.21.1 | id=aUrTRV7H | 2026-07-16T10:23:29.937096Z | https://cdn.modrinth.com/data/P7dR8mSH/versions/aUrTRV7H/fabric-api-0.116.14%2B1.21.1.jar
+0.116.13+1.21.1 | id=FHknjVVa | 2026-07-01T12:16:45.241134Z | https://cdn.modrinth.com/data/P7dR8mSH/versions/FHknjVVa/fabric-api-0.116.13%2B1.21.1.jar
+== modrinth fabric-language-kotlin
+1.14.2+kotlin.2.4.21 | id=SKW1BTL3 | 2026-10-09T08:17:15.786208Z | https://cdn.modrinth.com/data/Ha28R6CL/versions/SKW1BTL3/fabric-language-kotlin-1.14.2%2Bkotlin.2.4.21.jar
+1.14.1+kotlin.2.4.20 | id=eRRZzGMc | 2026-09-07T12:48:38.555893Z | https://cdn.modrinth.com/data/Ha28R6CL/versions/eRRZzGMc/fabric-language-kotlin-1.14.1%2Bkotlin.2.4.20.jar
+1.14.0+kotlin.2.4.20 | id=BKnpByHl | 2026-09-07T12:42:46.001553Z | https://cdn.modrinth.com/data/Ha28R6CL/versions/BKnpByHl/fabric-language-kotlin-1.14.0%2Bkotlin.2.4.20.jar
+1.13.14+kotlin.2.4.20 | id=KcCe0rZz | 2026-09-07T12:22:21.223836Z | https://cdn.modrinth.com/data/Ha28R6CL/versions/KcCe0rZz/fabric-language-kotlin-1.13.14%2Bkotlin.2.4.20.jar
+1.13.13+kotlin.2.4.10 | id=bdhiINYC | 2026-07-15T20:14:45.530782Z | https://cdn.modrinth.com/data/Ha28R6CL/versions/bdhiINYC/fabric-language-kotlin-1.13.13%2Bkotlin.2.4.10.jar
+1.13.12+kotlin.2.4.0 | id=Pd0xrHCw | 2026-06-03T10:40:44.954667Z | https://cdn.modrinth.com/data/Ha28R6CL/versions/Pd0xrHCw/fabric-language-kotlin-1.13.12%2Bkotlin.2.4.0.jar
+== modrinth luckperms
+v5.4.140-fabric | id=l47d4ZWk | 2024-08-22T21:33:40.834033Z | https://cdn.modrinth.com/data/Vebnzrzj/versions/l47d4ZWk/LuckPerms-Fabric-5.4.140.jar
+v5.4.139-fabric | id=oLykW1F8 | 2024-08-12T18:55:25.312627Z | https://cdn.modrinth.com/data/Vebnzrzj/versions/oLykW1F8/LuckPerms-Fabric-5.4.139.jar
+== modrinth placeholder-api
+2.4.2+1.21 | id=U5bhVym2 | 2025-01-27T19:08:23.196696Z | https://cdn.modrinth.com/data/eXts2L7r/versions/U5bhVym2/placeholder-api-2.4.2%2B1.21.jar
+2.4.1+1.21 | id=cE5TczQr | 2024-07-15T13:08:02.625577Z | https://cdn.modrinth.com/data/eXts2L7r/versions/cE5TczQr/placeholder-api-2.4.1%2B1.21.jar
+== modrinth shadowchat
+1.4-fixes | id=RnsWNFwS | 2026-08-08T15:44:43.858518Z | https://cdn.modrinth.com/data/mdvrFNtK/versions/RnsWNFwS/ShadowChat-1.4-fixes.jar
+1.4 | id=feAEhMAT | 2026-08-03T20:01:29.464296Z | https://cdn.modrinth.com/data/mdvrFNtK/versions/feAEhMAT/ShadowChat-1.4.jar
+1.3 | id=ZggkbjMf | 2026-02-01T18:23:50.025702Z | https://cdn.modrinth.com/data/mdvrFNtK/versions/ZggkbjMf/ShadowChat-1.3.jar
+1.2 | id=e8rpNOBu | 2026-01-26T12:28:45.175718Z | https://cdn.modrinth.com/data/mdvrFNtK/versions/e8rpNOBu/ShadowChat-1.2.jar
+1.1 | id=qopLG9Va | 2025-10-05T19:49:38.730389Z | https://cdn.modrinth.com/data/mdvrFNtK/versions/qopLG9Va/ShadowChat-1.1.jar
+1.0 | id=lTJcoKnJ | 2025-08-08T15:31:18.819005Z | https://cdn.modrinth.com/data/mdvrFNtK/versions/lTJcoKnJ/ShadowChat-1.0.jar

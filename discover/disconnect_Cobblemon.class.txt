@@ -1,0 +1,773 @@
+Compiled from "Cobblemon.java"
+public final class com.cobblemon.mod.common.Cobblemon {
+  public static final com.cobblemon.mod.common.Cobblemon INSTANCE;
+
+  static final kotlin.reflect.KProperty<java.lang.Object>[] $$delegatedProperties;
+
+  public static final java.lang.String MODID;
+
+  public static final java.lang.String VERSION;
+
+  public static final java.lang.String CONFIG_PATH;
+
+  public static final org.apache.logging.log4j.Logger LOGGER;
+
+  public static com.cobblemon.mod.common.CobblemonImplementation implementation;
+
+  private static com.cobblemon.mod.common.api.pokemon.experience.ExperienceCalculator experienceCalculator;
+
+  private static com.cobblemon.mod.common.api.pokemon.stats.EvCalculator evYieldCalculator;
+
+  private static com.cobblemon.mod.common.api.starter.StarterHandler starterHandler;
+
+  private static boolean isDedicatedServer;
+
+  private static final com.cobblemon.mod.common.battles.ShowdownThread showdownThread;
+
+  public static com.cobblemon.mod.common.config.CobblemonConfig config;
+
+  private static com.cobblemon.mod.common.api.spawning.SpawningZoneGenerator spawningZoneGenerator;
+
+  private static com.cobblemon.mod.common.api.spawning.position.AreaSpawnablePositionResolver areaSpawnablePositionResolver;
+
+  private static final com.cobblemon.mod.common.api.spawning.BestSpawner bestSpawner;
+
+  private static final com.cobblemon.mod.common.battles.BattleRegistry battleRegistry;
+
+  private static com.cobblemon.mod.common.api.storage.PokemonStoreManager storage;
+
+  private static com.cobblemon.mod.common.api.storage.molang.NbtMoLangDataStoreFactory molangData;
+
+  public static com.cobblemon.mod.common.api.storage.player.PlayerInstancedDataStoreManager playerDataManager;
+
+  public static com.cobblemon.mod.common.config.starter.StarterConfig starterConfig;
+
+  private static final com.cobblemon.mod.common.api.data.DataProvider dataProvider;
+
+  private static final kotlin.properties.ReadWriteProperty permissionValidator$delegate;
+
+  private static com.cobblemon.mod.common.api.pokemon.stats.StatProvider statProvider;
+
+  private static com.cobblemon.mod.common.api.SeasonResolver seasonResolver;
+
+  private static java.util.Map<java.util.UUID, java.util.Set<net.minecraft.class_2960>> wallpapers;
+
+  private static final java.util.Map<java.util.UUID, com.cobblemon.mod.common.api.molang.ObjectValue<net.minecraft.class_1657>> serverPlayerStructs;
+
+  private static final com.cobblemon.mod.common.api.stats.CobblemonStats statistics;
+
+  private static final java.util.List<com.cobblemon.mod.common.client.CobblemonPack> builtinPacks;
+
+  private com.cobblemon.mod.common.Cobblemon();
+    Code:
+       0: aload_0
+       1: invokespecial #341                // Method java/lang/Object."<init>":()V
+       4: return
+
+  public final com.cobblemon.mod.common.CobblemonImplementation getImplementation();
+    Code:
+       0: getstatic     #344                // Field implementation:Lcom/cobblemon/mod/common/CobblemonImplementation;
+       3: dup
+       4: ifnull        8
+       7: areturn
+       8: pop
+       9: ldc_w         #347                // String implementation
+      12: invokestatic  #353                // Method kotlin/jvm/internal/Intrinsics.throwUninitializedPropertyAccessException:(Ljava/lang/String;)V
+      15: aconst_null
+      16: areturn
+
+  public final void setImplementation(com.cobblemon.mod.common.CobblemonImplementation);
+    Code:
+       0: aload_1
+       1: ldc_w         #354                // String <set-?>
+       4: invokestatic  #358                // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       7: aload_1
+       8: putstatic     #344                // Field implementation:Lcom/cobblemon/mod/common/CobblemonImplementation;
+      11: return
+
+  public final com.cobblemon.mod.common.api.pokeball.catching.calculators.CaptureCalculator getCaptureCalculator();
+    Code:
+       0: aload_0
+       1: invokevirtual #360                // Method getConfig:()Lcom/cobblemon/mod/common/config/CobblemonConfig;
+       4: invokevirtual #362                // Method com/cobblemon/mod/common/config/CobblemonConfig.getCaptureCalculator:()Lcom/cobblemon/mod/common/api/pokeball/catching/calculators/CaptureCalculator;
+       7: areturn
+
+  public final void setCaptureCalculator(com.cobblemon.mod.common.api.pokeball.catching.calculators.CaptureCalculator);
+    Code:
+       0: aload_1
+       1: ldc_w         #363                // String value
+       4: invokestatic  #358                // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       7: aload_0
+       8: invokevirtual #360                // Method getConfig:()Lcom/cobblemon/mod/common/config/CobblemonConfig;
+      11: aload_1
+      12: invokevirtual #365                // Method com/cobblemon/mod/common/config/CobblemonConfig.setCaptureCalculator:(Lcom/cobblemon/mod/common/api/pokeball/catching/calculators/CaptureCalculator;)V
+      15: return
+
+  public static void getCaptureCalculator$annotations();
+    Code:
+       0: return
+
+  public final com.cobblemon.mod.common.api.pokemon.experience.ExperienceCalculator getExperienceCalculator();
+    Code:
+       0: getstatic     #375                // Field experienceCalculator:Lcom/cobblemon/mod/common/api/pokemon/experience/ExperienceCalculator;
+       3: areturn
+
+  public final void setExperienceCalculator(com.cobblemon.mod.common.api.pokemon.experience.ExperienceCalculator);
+    Code:
+       0: aload_1
+       1: ldc_w         #354                // String <set-?>
+       4: invokestatic  #358                // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       7: aload_1
+       8: putstatic     #375                // Field experienceCalculator:Lcom/cobblemon/mod/common/api/pokemon/experience/ExperienceCalculator;
+      11: return
+
+  public final com.cobblemon.mod.common.api.pokemon.stats.EvCalculator getEvYieldCalculator();
+    Code:
+       0: getstatic     #377                // Field evYieldCalculator:Lcom/cobblemon/mod/common/api/pokemon/stats/EvCalculator;
+       3: areturn
+
+  public final void setEvYieldCalculator(com.cobblemon.mod.common.api.pokemon.stats.EvCalculator);
+    Code:
+       0: aload_1
+       1: ldc_w         #354                // String <set-?>
+       4: invokestatic  #358                // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       7: aload_1
+       8: putstatic     #377                // Field evYieldCalculator:Lcom/cobblemon/mod/common/api/pokemon/stats/EvCalculator;
+      11: return
+
+  public final com.cobblemon.mod.common.api.starter.StarterHandler getStarterHandler();
+    Code:
+       0: getstatic     #379                // Field starterHandler:Lcom/cobblemon/mod/common/api/starter/StarterHandler;
+       3: areturn
+
+  public final void setStarterHandler(com.cobblemon.mod.common.api.starter.StarterHandler);
+    Code:
+       0: aload_1
+       1: ldc_w         #354                // String <set-?>
+       4: invokestatic  #358                // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       7: aload_1
+       8: putstatic     #379                // Field starterHandler:Lcom/cobblemon/mod/common/api/starter/StarterHandler;
+      11: return
+
+  public final boolean isDedicatedServer();
+    Code:
+       0: getstatic     #381                // Field isDedicatedServer:Z
+       3: ireturn
+
+  public final void setDedicatedServer(boolean);
+    Code:
+       0: iload_1
+       1: putstatic     #381                // Field isDedicatedServer:Z
+       4: return
+
+  public final com.cobblemon.mod.common.battles.ShowdownThread getShowdownThread();
+    Code:
+       0: getstatic     #383                // Field showdownThread:Lcom/cobblemon/mod/common/battles/ShowdownThread;
+       3: areturn
+
+  public final com.cobblemon.mod.common.config.CobblemonConfig getConfig();
+    Code:
+       0: getstatic     #385                // Field config:Lcom/cobblemon/mod/common/config/CobblemonConfig;
+       3: dup
+       4: ifnull        8
+       7: areturn
+       8: pop
+       9: ldc_w         #386                // String config
+      12: invokestatic  #353                // Method kotlin/jvm/internal/Intrinsics.throwUninitializedPropertyAccessException:(Ljava/lang/String;)V
+      15: aconst_null
+      16: areturn
+
+  public final void setConfig(com.cobblemon.mod.common.config.CobblemonConfig);
+    Code:
+       0: aload_1
+       1: ldc_w         #354                // String <set-?>
+       4: invokestatic  #358                // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       7: aload_1
+       8: putstatic     #385                // Field config:Lcom/cobblemon/mod/common/config/CobblemonConfig;
+      11: return
+
+  public final com.cobblemon.mod.common.api.spawning.SpawningZoneGenerator getSpawningZoneGenerator();
+    Code:
+       0: getstatic     #388                // Field spawningZoneGenerator:Lcom/cobblemon/mod/common/api/spawning/SpawningZoneGenerator;
+       3: areturn
+
+  public final void setSpawningZoneGenerator(com.cobblemon.mod.common.api.spawning.SpawningZoneGenerator);
+    Code:
+       0: aload_1
+       1: ldc_w         #354                // String <set-?>
+       4: invokestatic  #358                // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       7: aload_1
+       8: putstatic     #388                // Field spawningZoneGenerator:Lcom/cobblemon/mod/common/api/spawning/SpawningZoneGenerator;
+      11: return
+
+  public final com.cobblemon.mod.common.api.spawning.position.AreaSpawnablePositionResolver getAreaSpawnablePositionResolver();
+    Code:
+       0: getstatic     #390                // Field areaSpawnablePositionResolver:Lcom/cobblemon/mod/common/api/spawning/position/AreaSpawnablePositionResolver;
+       3: areturn
+
+  public final void setAreaSpawnablePositionResolver(com.cobblemon.mod.common.api.spawning.position.AreaSpawnablePositionResolver);
+    Code:
+       0: aload_1
+       1: ldc_w         #354                // String <set-?>
+       4: invokestatic  #358                // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       7: aload_1
+       8: putstatic     #390                // Field areaSpawnablePositionResolver:Lcom/cobblemon/mod/common/api/spawning/position/AreaSpawnablePositionResolver;
+      11: return
+
+  public final com.cobblemon.mod.common.api.spawning.BestSpawner getBestSpawner();
+    Code:
+       0: getstatic     #392                // Field bestSpawner:Lcom/cobblemon/mod/common/api/spawning/BestSpawner;
+       3: areturn
+
+  public final com.cobblemon.mod.common.battles.BattleRegistry getBattleRegistry();
+    Code:
+       0: getstatic     #394                // Field battleRegistry:Lcom/cobblemon/mod/common/battles/BattleRegistry;
+       3: areturn
+
+  public final com.cobblemon.mod.common.api.storage.PokemonStoreManager getStorage();
+    Code:
+       0: getstatic     #396                // Field storage:Lcom/cobblemon/mod/common/api/storage/PokemonStoreManager;
+       3: areturn
+
+  public final void setStorage(com.cobblemon.mod.common.api.storage.PokemonStoreManager);
+    Code:
+       0: aload_1
+       1: ldc_w         #354                // String <set-?>
+       4: invokestatic  #358                // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       7: aload_1
+       8: putstatic     #396                // Field storage:Lcom/cobblemon/mod/common/api/storage/PokemonStoreManager;
+      11: return
+
+  public final com.cobblemon.mod.common.api.storage.molang.NbtMoLangDataStoreFactory getMolangData();
+    Code:
+       0: getstatic     #398                // Field molangData:Lcom/cobblemon/mod/common/api/storage/molang/NbtMoLangDataStoreFactory;
+       3: areturn
+
+  public final void setMolangData(com.cobblemon.mod.common.api.storage.molang.NbtMoLangDataStoreFactory);
+    Code:
+       0: aload_1
+       1: ldc_w         #354                // String <set-?>
+       4: invokestatic  #358                // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       7: aload_1
+       8: putstatic     #398                // Field molangData:Lcom/cobblemon/mod/common/api/storage/molang/NbtMoLangDataStoreFactory;
+      11: return
+
+  public final com.cobblemon.mod.common.api.storage.player.PlayerInstancedDataStoreManager getPlayerDataManager();
+    Code:
+       0: getstatic     #400                // Field playerDataManager:Lcom/cobblemon/mod/common/api/storage/player/PlayerInstancedDataStoreManager;
+       3: dup
+       4: ifnull        8
+       7: areturn
+       8: pop
+       9: ldc_w         #403                // String playerDataManager
+      12: invokestatic  #353                // Method kotlin/jvm/internal/Intrinsics.throwUninitializedPropertyAccessException:(Ljava/lang/String;)V
+      15: aconst_null
+      16: areturn
+
+  public final void setPlayerDataManager(com.cobblemon.mod.common.api.storage.player.PlayerInstancedDataStoreManager);
+    Code:
+       0: aload_1
+       1: ldc_w         #354                // String <set-?>
+       4: invokestatic  #358                // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       7: aload_1
+       8: putstatic     #400                // Field playerDataManager:Lcom/cobblemon/mod/common/api/storage/player/PlayerInstancedDataStoreManager;
+      11: return
+
+  public final com.cobblemon.mod.common.config.starter.StarterConfig getStarterConfig();
+    Code:
+       0: getstatic     #405                // Field starterConfig:Lcom/cobblemon/mod/common/config/starter/StarterConfig;
+       3: dup
+       4: ifnull        8
+       7: areturn
+       8: pop
+       9: ldc_w         #406                // String starterConfig
+      12: invokestatic  #353                // Method kotlin/jvm/internal/Intrinsics.throwUninitializedPropertyAccessException:(Ljava/lang/String;)V
+      15: aconst_null
+      16: areturn
+
+  public final void setStarterConfig(com.cobblemon.mod.common.config.starter.StarterConfig);
+    Code:
+       0: aload_1
+       1: ldc_w         #354                // String <set-?>
+       4: invokestatic  #358                // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       7: aload_1
+       8: putstatic     #405                // Field starterConfig:Lcom/cobblemon/mod/common/config/starter/StarterConfig;
+      11: return
+
+  public final com.cobblemon.mod.common.api.data.DataProvider getDataProvider();
+    Code:
+       0: getstatic     #408                // Field dataProvider:Lcom/cobblemon/mod/common/api/data/DataProvider;
+       3: areturn
+
+  public final com.cobblemon.mod.common.api.permission.PermissionValidator getPermissionValidator();
+    Code:
+       0: getstatic     #410                // Field permissionValidator$delegate:Lkotlin/properties/ReadWriteProperty;
+       3: aload_0
+       4: getstatic     #412                // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+       7: iconst_0
+       8: aaload
+       9: invokeinterface #418,  3          // InterfaceMethod kotlin/properties/ReadWriteProperty.getValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+      14: checkcast     #420                // class com/cobblemon/mod/common/api/permission/PermissionValidator
+      17: areturn
+
+  public final void setPermissionValidator(com.cobblemon.mod.common.api.permission.PermissionValidator);
+    Code:
+       0: aload_1
+       1: ldc_w         #354                // String <set-?>
+       4: invokestatic  #358                // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       7: getstatic     #410                // Field permissionValidator$delegate:Lkotlin/properties/ReadWriteProperty;
+      10: aload_0
+      11: getstatic     #412                // Field $$delegatedProperties:[Lkotlin/reflect/KProperty;
+      14: iconst_0
+      15: aaload
+      16: aload_1
+      17: invokeinterface #424,  4          // InterfaceMethod kotlin/properties/ReadWriteProperty.setValue:(Ljava/lang/Object;Lkotlin/reflect/KProperty;Ljava/lang/Object;)V
+      22: return
+
+  public final com.cobblemon.mod.common.api.pokemon.stats.StatProvider getStatProvider();
+    Code:
+       0: getstatic     #426                // Field statProvider:Lcom/cobblemon/mod/common/api/pokemon/stats/StatProvider;
+       3: areturn
+
+  public final void setStatProvider(com.cobblemon.mod.common.api.pokemon.stats.StatProvider);
+    Code:
+       0: aload_1
+       1: ldc_w         #354                // String <set-?>
+       4: invokestatic  #358                // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       7: aload_1
+       8: putstatic     #426                // Field statProvider:Lcom/cobblemon/mod/common/api/pokemon/stats/StatProvider;
+      11: return
+
+  public final com.cobblemon.mod.common.api.SeasonResolver getSeasonResolver();
+    Code:
+       0: getstatic     #428                // Field seasonResolver:Lcom/cobblemon/mod/common/api/SeasonResolver;
+       3: areturn
+
+  public final void setSeasonResolver(com.cobblemon.mod.common.api.SeasonResolver);
+    Code:
+       0: aload_1
+       1: ldc_w         #354                // String <set-?>
+       4: invokestatic  #358                // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       7: aload_1
+       8: putstatic     #428                // Field seasonResolver:Lcom/cobblemon/mod/common/api/SeasonResolver;
+      11: return
+
+  public final java.util.Map<java.util.UUID, java.util.Set<net.minecraft.class_2960>> getWallpapers();
+    Code:
+       0: getstatic     #431                // Field wallpapers:Ljava/util/Map;
+       3: areturn
+
+  public final void setWallpapers(java.util.Map<java.util.UUID, java.util.Set<net.minecraft.class_2960>>);
+    Code:
+       0: aload_1
+       1: ldc_w         #354                // String <set-?>
+       4: invokestatic  #358                // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       7: aload_1
+       8: putstatic     #431                // Field wallpapers:Ljava/util/Map;
+      11: return
+
+  public final java.util.Map<java.util.UUID, com.cobblemon.mod.common.api.molang.ObjectValue<net.minecraft.class_1657>> getServerPlayerStructs();
+    Code:
+       0: getstatic     #435                // Field serverPlayerStructs:Ljava/util/Map;
+       3: areturn
+
+  public final com.cobblemon.mod.common.api.stats.CobblemonStats getStatistics();
+    Code:
+       0: getstatic     #437                // Field statistics:Lcom/cobblemon/mod/common/api/stats/CobblemonStats;
+       3: areturn
+
+  public static final java.util.List<com.cobblemon.mod.common.client.CobblemonPack> getBuiltinPacks();
+    Code:
+       0: getstatic     #440                // Field builtinPacks:Ljava/util/List;
+       3: areturn
+
+  public static void getBuiltinPacks$annotations();
+    Code:
+       0: return
+
+  public final void preInitialize(com.cobblemon.mod.common.CobblemonImplementation);
+    Code:
+       0: aload_1
+       1: ldc_w         #347                // String implementation
+       4: invokestatic  #358                // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       7: aload_0
+       8: aload_1
+       9: invokevirtual #443                // Method setImplementation:(Lcom/cobblemon/mod/common/CobblemonImplementation;)V
+      12: getstatic     #445                // Field LOGGER:Lorg/apache/logging/log4j/Logger;
+      15: ldc_w         #447                // String Launching Cobblemon 1.8.4
+      18: invokeinterface #452,  2          // InterfaceMethod org/apache/logging/log4j/Logger.info:(Ljava/lang/String;)V
+      23: nop
+      24: aload_1
+      25: invokeinterface #455,  1          // InterfaceMethod com/cobblemon/mod/common/CobblemonImplementation.registerRecipeSerializers:()V
+      30: aload_1
+      31: invokeinterface #458,  1          // InterfaceMethod com/cobblemon/mod/common/CobblemonImplementation.registerRecipeTypes:()V
+      36: aload_1
+      37: invokeinterface #461,  1          // InterfaceMethod com/cobblemon/mod/common/CobblemonImplementation.registerPermissionValidator:()V
+      42: aload_1
+      43: invokeinterface #464,  1          // InterfaceMethod com/cobblemon/mod/common/CobblemonImplementation.registerSoundEvents:()V
+      48: aload_1
+      49: invokeinterface #467,  1          // InterfaceMethod com/cobblemon/mod/common/CobblemonImplementation.registerDataComponents:()V
+      54: aload_1
+      55: invokeinterface #470,  1          // InterfaceMethod com/cobblemon/mod/common/CobblemonImplementation.registerBlocks:()V
+      60: aload_1
+      61: invokeinterface #473,  1          // InterfaceMethod com/cobblemon/mod/common/CobblemonImplementation.registerItems:()V
+      66: aload_1
+      67: invokeinterface #476,  1          // InterfaceMethod com/cobblemon/mod/common/CobblemonImplementation.registerEntityTypes:()V
+      72: aload_1
+      73: invokeinterface #479,  1          // InterfaceMethod com/cobblemon/mod/common/CobblemonImplementation.registerEntityAttributes:()V
+      78: aload_1
+      79: invokeinterface #482,  1          // InterfaceMethod com/cobblemon/mod/common/CobblemonImplementation.registerBlockEntityTypes:()V
+      84: aload_1
+      85: invokeinterface #485,  1          // InterfaceMethod com/cobblemon/mod/common/CobblemonImplementation.registerPoiTypes:()V
+      90: aload_1
+      91: invokeinterface #488,  1          // InterfaceMethod com/cobblemon/mod/common/CobblemonImplementation.registerVillagers:()V
+      96: aload_1
+      97: invokeinterface #491,  1          // InterfaceMethod com/cobblemon/mod/common/CobblemonImplementation.registerWorldGenFeatures:()V
+     102: aload_1
+     103: invokeinterface #494,  1          // InterfaceMethod com/cobblemon/mod/common/CobblemonImplementation.registerParticles:()V
+     108: aload_1
+     109: invokeinterface #497,  1          // InterfaceMethod com/cobblemon/mod/common/CobblemonImplementation.registerMenu:()V
+     114: aload_1
+     115: invokeinterface #500,  1          // InterfaceMethod com/cobblemon/mod/common/CobblemonImplementation.registerEntityDataSerializers:()V
+     120: aload_1
+     121: invokeinterface #503,  1          // InterfaceMethod com/cobblemon/mod/common/CobblemonImplementation.registerCriteria:()V
+     126: aload_1
+     127: invokeinterface #506,  1          // InterfaceMethod com/cobblemon/mod/common/CobblemonImplementation.registerEntitySubPredicates:()V
+     132: aload_1
+     133: invokeinterface #509,  1          // InterfaceMethod com/cobblemon/mod/common/CobblemonImplementation.registerMobEffects:()V
+     138: getstatic     #514                // Field com/cobblemon/mod/common/block/dispenser/DispenserBehaviorRegistry.INSTANCE:Lcom/cobblemon/mod/common/block/dispenser/DispenserBehaviorRegistry;
+     141: invokevirtual #517                // Method com/cobblemon/mod/common/block/dispenser/DispenserBehaviorRegistry.registerDispenserBehaviors:()V
+     144: getstatic     #520                // Field com/cobblemon/mod/common/api/drop/DropEntry.Companion:Lcom/cobblemon/mod/common/api/drop/DropEntry$Companion;
+     147: ldc_w         #522                // String command
+     150: ldc_w         #524                // class com/cobblemon/mod/common/api/drop/CommandDropEntry
+     153: iconst_0
+     154: iconst_4
+     155: aconst_null
+     156: invokestatic  #528                // Method com/cobblemon/mod/common/api/drop/DropEntry$Companion.register$default:(Lcom/cobblemon/mod/common/api/drop/DropEntry$Companion;Ljava/lang/String;Ljava/lang/Class;ZILjava/lang/Object;)V
+     159: getstatic     #520                // Field com/cobblemon/mod/common/api/drop/DropEntry.Companion:Lcom/cobblemon/mod/common/api/drop/DropEntry$Companion;
+     162: ldc_w         #530                // String item
+     165: ldc_w         #532                // class com/cobblemon/mod/common/api/drop/ItemDropEntry
+     168: iconst_1
+     169: invokevirtual #536                // Method com/cobblemon/mod/common/api/drop/DropEntry$Companion.register:(Ljava/lang/String;Ljava/lang/Class;Z)V
+     172: getstatic     #520                // Field com/cobblemon/mod/common/api/drop/DropEntry.Companion:Lcom/cobblemon/mod/common/api/drop/DropEntry$Companion;
+     175: ldc_w         #538                // String evolution
+     178: ldc_w         #540                // class com/cobblemon/mod/common/api/drop/EvolutionItemDropEntry
+     181: iconst_0
+     182: iconst_4
+     183: aconst_null
+     184: invokestatic  #528                // Method com/cobblemon/mod/common/api/drop/DropEntry$Companion.register$default:(Lcom/cobblemon/mod/common/api/drop/DropEntry$Companion;Ljava/lang/String;Ljava/lang/Class;ZILjava/lang/Object;)V
+     187: getstatic     #545                // Field com/cobblemon/mod/common/api/pokemon/experience/ExperienceGroups.INSTANCE:Lcom/cobblemon/mod/common/api/pokemon/experience/ExperienceGroups;
+     190: invokevirtual #548                // Method com/cobblemon/mod/common/api/pokemon/experience/ExperienceGroups.registerDefaults:()V
+     193: getstatic     #553                // Field com/cobblemon/mod/common/api/pokeball/catching/calculators/CaptureCalculators.INSTANCE:Lcom/cobblemon/mod/common/api/pokeball/catching/calculators/CaptureCalculators;
+     196: invokevirtual #556                // Method com/cobblemon/mod/common/api/pokeball/catching/calculators/CaptureCalculators.registerDefaults$common:()V
+     199: aload_0
+     200: invokevirtual #558                // Method loadConfig:()V
+     203: getstatic     #563                // Field com/cobblemon/mod/common/world/feature/ore/CobblemonOrePlacedFeatures.INSTANCE:Lcom/cobblemon/mod/common/world/feature/ore/CobblemonOrePlacedFeatures;
+     206: invokevirtual #565                // Method com/cobblemon/mod/common/world/feature/ore/CobblemonOrePlacedFeatures.register:()V
+     209: getstatic     #570                // Field com/cobblemon/mod/common/world/feature/CobblemonPlacedFeatures.INSTANCE:Lcom/cobblemon/mod/common/world/feature/CobblemonPlacedFeatures;
+     212: invokevirtual #571                // Method com/cobblemon/mod/common/world/feature/CobblemonPlacedFeatures.register:()V
+     215: aload_0
+     216: invokespecial #573                // Method registerArgumentTypes:()V
+     219: getstatic     #578                // Field com/cobblemon/mod/common/world/gamerules/CobblemonGameRules.INSTANCE:Lcom/cobblemon/mod/common/world/gamerules/CobblemonGameRules;
+     222: pop
+     223: getstatic     #583                // Field com/cobblemon/mod/common/api/pokemon/effect/ShoulderEffectRegistry.INSTANCE:Lcom/cobblemon/mod/common/api/pokemon/effect/ShoulderEffectRegistry;
+     226: invokevirtual #586                // Method com/cobblemon/mod/common/api/pokemon/effect/ShoulderEffectRegistry.register$common:()V
+     229: getstatic     #592                // Field com/cobblemon/mod/common/api/events/CobblemonEvents.DATA_SYNCHRONIZED:Lcom/cobblemon/mod/common/api/reactive/SimpleObservable;
+     232: checkcast     #594                // class com/cobblemon/mod/common/api/reactive/Observable
+     235: aconst_null
+     236: invokedynamic #613,  0            // InvokeDynamic #0:invoke:()Lkotlin/jvm/functions/Function1;
+     241: iconst_1
+     242: aconst_null
+     243: invokestatic  #617                // InterfaceMethod com/cobblemon/mod/common/api/reactive/Observable.subscribe$default:(Lcom/cobblemon/mod/common/api/reactive/Observable;Lcom/cobblemon/mod/common/api/Priority;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/cobblemon/mod/common/api/reactive/ObservableSubscription;
+     246: pop
+     247: getstatic     #623                // Field com/cobblemon/mod/common/platform/events/PlatformEvents.SERVER_PLAYER_LOGOUT:Lcom/cobblemon/mod/common/api/reactive/EventObservable;
+     250: checkcast     #594                // class com/cobblemon/mod/common/api/reactive/Observable
+     253: aconst_null
+     254: invokedynamic #630,  0            // InvokeDynamic #1:invoke:()Lkotlin/jvm/functions/Function1;
+     259: iconst_1
+     260: aconst_null
+     261: invokestatic  #617                // InterfaceMethod com/cobblemon/mod/common/api/reactive/Observable.subscribe$default:(Lcom/cobblemon/mod/common/api/reactive/Observable;Lcom/cobblemon/mod/common/api/Priority;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/cobblemon/mod/common/api/reactive/ObservableSubscription;
+     264: pop
+     265: getstatic     #633                // Field com/cobblemon/mod/common/platform/events/PlatformEvents.PLAYER_RESPAWN:Lcom/cobblemon/mod/common/api/reactive/EventObservable;
+     268: checkcast     #594                // class com/cobblemon/mod/common/api/reactive/Observable
+     271: aconst_null
+     272: invokedynamic #640,  0            // InvokeDynamic #2:invoke:()Lkotlin/jvm/functions/Function1;
+     277: iconst_1
+     278: aconst_null
+     279: invokestatic  #617                // InterfaceMethod com/cobblemon/mod/common/api/reactive/Observable.subscribe$default:(Lcom/cobblemon/mod/common/api/reactive/Observable;Lcom/cobblemon/mod/common/api/Priority;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/cobblemon/mod/common/api/reactive/ObservableSubscription;
+     282: pop
+     283: getstatic     #644                // Field com/cobblemon/mod/common/platform/events/PlatformEvents.PLAYER_DEATH:Lcom/cobblemon/mod/common/api/reactive/CancelableObservable;
+     286: checkcast     #594                // class com/cobblemon/mod/common/api/reactive/Observable
+     289: aconst_null
+     290: invokedynamic #651,  0            // InvokeDynamic #3:invoke:()Lkotlin/jvm/functions/Function1;
+     295: iconst_1
+     296: aconst_null
+     297: invokestatic  #617                // InterfaceMethod com/cobblemon/mod/common/api/reactive/Observable.subscribe$default:(Lcom/cobblemon/mod/common/api/reactive/Observable;Lcom/cobblemon/mod/common/api/Priority;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/cobblemon/mod/common/api/reactive/ObservableSubscription;
+     300: pop
+     301: getstatic     #654                // Field com/cobblemon/mod/common/platform/events/PlatformEvents.RIGHT_CLICK_ENTITY:Lcom/cobblemon/mod/common/api/reactive/CancelableObservable;
+     304: checkcast     #594                // class com/cobblemon/mod/common/api/reactive/Observable
+     307: aconst_null
+     308: invokedynamic #661,  0            // InvokeDynamic #4:invoke:()Lkotlin/jvm/functions/Function1;
+     313: iconst_1
+     314: aconst_null
+     315: invokestatic  #617                // InterfaceMethod com/cobblemon/mod/common/api/reactive/Observable.subscribe$default:(Lcom/cobblemon/mod/common/api/reactive/Observable;Lcom/cobblemon/mod/common/api/Priority;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/cobblemon/mod/common/api/reactive/ObservableSubscription;
+     318: pop
+     319: getstatic     #664                // Field com/cobblemon/mod/common/platform/events/PlatformEvents.RIGHT_CLICK_BLOCK:Lcom/cobblemon/mod/common/api/reactive/CancelableObservable;
+     322: checkcast     #594                // class com/cobblemon/mod/common/api/reactive/Observable
+     325: aconst_null
+     326: invokedynamic #671,  0            // InvokeDynamic #5:invoke:()Lkotlin/jvm/functions/Function1;
+     331: iconst_1
+     332: aconst_null
+     333: invokestatic  #617                // InterfaceMethod com/cobblemon/mod/common/api/reactive/Observable.subscribe$default:(Lcom/cobblemon/mod/common/api/reactive/Observable;Lcom/cobblemon/mod/common/api/Priority;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/cobblemon/mod/common/api/reactive/ObservableSubscription;
+     336: pop
+     337: getstatic     #674                // Field com/cobblemon/mod/common/platform/events/PlatformEvents.CHANGE_DIMENSION:Lcom/cobblemon/mod/common/api/reactive/EventObservable;
+     340: checkcast     #594                // class com/cobblemon/mod/common/api/reactive/Observable
+     343: aconst_null
+     344: invokedynamic #681,  0            // InvokeDynamic #6:invoke:()Lkotlin/jvm/functions/Function1;
+     349: iconst_1
+     350: aconst_null
+     351: invokestatic  #617                // InterfaceMethod com/cobblemon/mod/common/api/reactive/Observable.subscribe$default:(Lcom/cobblemon/mod/common/api/reactive/Observable;Lcom/cobblemon/mod/common/api/Priority;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/cobblemon/mod/common/api/reactive/ObservableSubscription;
+     354: pop
+     355: getstatic     #684                // Field com/cobblemon/mod/common/api/events/CobblemonEvents.FRIENDSHIP_UPDATED:Lcom/cobblemon/mod/common/api/reactive/EventObservable;
+     358: getstatic     #690                // Field com/cobblemon/mod/common/api/Priority.LOWEST:Lcom/cobblemon/mod/common/api/Priority;
+     361: invokedynamic #697,  0            // InvokeDynamic #7:invoke:()Lkotlin/jvm/functions/Function1;
+     366: invokevirtual #703                // Method com/cobblemon/mod/common/api/reactive/EventObservable.subscribe:(Lcom/cobblemon/mod/common/api/Priority;Lkotlin/jvm/functions/Function1;)Lcom/cobblemon/mod/common/api/reactive/ObservableSubscription;
+     369: pop
+     370: getstatic     #708                // Field com/cobblemon/mod/common/pokemon/helditem/CobblemonHeldItemManager.INSTANCE:Lcom/cobblemon/mod/common/pokemon/helditem/CobblemonHeldItemManager;
+     373: checkcast     #710                // class com/cobblemon/mod/common/api/pokemon/helditem/HeldItemManager
+     376: getstatic     #690                // Field com/cobblemon/mod/common/api/Priority.LOWEST:Lcom/cobblemon/mod/common/api/Priority;
+     379: invokestatic  #715                // Method com/cobblemon/mod/common/api/pokemon/helditem/HeldItemProvider.register:(Lcom/cobblemon/mod/common/api/pokemon/helditem/HeldItemManager;Lcom/cobblemon/mod/common/api/Priority;)V
+     382: return
+
+  public final void sendServerSettingsPacketToPlayer(net.minecraft.class_3222);
+    Code:
+       0: aload_1
+       1: ldc_w         #716                // String player
+       4: invokestatic  #358                // Method kotlin/jvm/internal/Intrinsics.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V
+       7: new           #718                // class com/cobblemon/mod/common/net/messages/client/settings/ServerSettingsPacket
+      10: dup
+      11: aload_0
+      12: invokevirtual #360                // Method getConfig:()Lcom/cobblemon/mod/common/config/CobblemonConfig;
+      15: invokevirtual #721                // Method com/cobblemon/mod/common/config/CobblemonConfig.getPreventCompletePartyDeposit:()Z
+      18: aload_0
+      19: invokevirtual #360                // Method getConfig:()Lcom/cobblemon/mod/common/config/CobblemonConfig;
+      22: invokevirtual #724                // Method com/cobblemon/mod/common/config/CobblemonConfig.getDisplayEntityLevelLabel:()Z
+      25: aload_0
+      26: invokevirtual #360                // Method getConfig:()Lcom/cobblemon/mod/common/config/CobblemonConfig;
+      29: invokevirtual #727                // Method com/cobblemon/mod/common/config/CobblemonConfig.getDisplayEntityNameLabel:()Z
+      32: aload_0
+      33: invokevirtual #360                // Method getConfig:()Lcom/cobblemon/mod/common/config/CobblemonConfig;
+      36: invokevirtual #731                // Method com/cobblemon/mod/common/config/CobblemonConfig.getMaxPokemonLevel:()I
+      39: aload_0
+      40: invokevirtual #360                // Method getConfig:()Lcom/cobblemon/mod/common/config/CobblemonConfig;
+      43: invokevirtual #734                // Method com/cobblemon/mod/common/config/CobblemonConfig.getMaxPokemonFriendship:()I
+      46: aload_0
+      47: invokevirtual #360                // Method getConfig:()Lcom/cobblemon/mod/common/config/CobblemonConfig;
+      50: invokevirtual #737                // Method com/cobblemon/mod/common/config/CobblemonConfig.getMaxDynamaxLevel:()I
+      53: aload_0
+      54: invokevirtual #360                // Method getConfig:()Lcom/cobblemon/mod/common/config/CobblemonConfig;
+      57: invokevirtual #740                // Method com/cobblemon/mod/common/config/CobblemonConfig.getUnlockAllMoveDexMovesByDefault:()Z
+      60: aload_0
+      61: invokevirtual #360                // Method getConfig:()Lcom/cobblemon/mod/common/config/CobblemonConfig;
+      64: invokevirtual #744                // Method com/cobblemon/mod/common/config/CobblemonConfig.getPokemonIntrinsicSizeMin:()F
+      67: aload_0
+      68: invokevirtual #360                // Method getConfig:()Lcom/cobblemon/mod/common/config/CobblemonConfig;
+      71: invokevirtual #747                // Method com/cobblemon/mod/common/config/CobblemonConfig.getPokemonIntrinsicSizeMax:()F
+      74: invokespecial #750                // Method com/cobblemon/mod/common/net/messages/client/settings/ServerSettingsPacket."<init>":(ZZZIIIZFF)V
+      77: aload_1
+      78: invokevirtual #753                // Method com/cobblemon/mod/common/net/messages/client/settings/ServerSettingsPacket.sendToPlayer:(Lnet/minecraft/class_3222;)V
+      81: return
+
+  public final void initialize();
+    Code:
+       0: getstatic     #383                // Field showdownThread:Lcom/cobblemon/mod/common/battles/ShowdownThread;
+       3: invokevirtual #758                // Method com/cobblemon/mod/common/battles/ShowdownThread.launch:()V
+       6: getstatic     #763                // Field com/cobblemon/mod/common/data/CobblemonDataProvider.INSTANCE:Lcom/cobblemon/mod/common/data/CobblemonDataProvider;
+       9: invokevirtual #764                // Method com/cobblemon/mod/common/data/CobblemonDataProvider.registerDefaults:()V
+      12: invokestatic  #770                // Method com/cobblemon/mod/common/pokemon/aspects/PokemonAspectsKt.getSHINY_ASPECT:()Lcom/cobblemon/mod/common/api/pokemon/aspect/SingleConditionalAspectProvider;
+      15: invokeinterface #775,  1          // InterfaceMethod com/cobblemon/mod/common/api/pokemon/aspect/SingleConditionalAspectProvider.register:()Lcom/cobblemon/mod/common/api/pokemon/aspect/AspectProvider;
+      20: pop
+      21: invokestatic  #778                // Method com/cobblemon/mod/common/pokemon/aspects/PokemonAspectsKt.getGENDER_ASPECT:()Lcom/cobblemon/mod/common/api/pokemon/aspect/AspectProvider;
+      24: invokeinterface #781,  1          // InterfaceMethod com/cobblemon/mod/common/api/pokemon/aspect/AspectProvider.register:()Lcom/cobblemon/mod/common/api/pokemon/aspect/AspectProvider;
+      29: pop
+      30: invokestatic  #784                // Method com/cobblemon/mod/common/pokemon/aspects/PokemonAspectsKt.getCOSMETIC_SLOT_ASPECT:()Lcom/cobblemon/mod/common/api/pokemon/aspect/AspectProvider;
+      33: invokeinterface #781,  1          // InterfaceMethod com/cobblemon/mod/common/api/pokemon/aspect/AspectProvider.register:()Lcom/cobblemon/mod/common/api/pokemon/aspect/AspectProvider;
+      38: pop
+      39: invokestatic  #787                // Method com/cobblemon/mod/common/pokemon/aspects/PokemonAspectsKt.getCHARACTERISTIC_RAINBOW_ASPECT:()Lcom/cobblemon/mod/common/api/pokemon/aspect/AspectProvider;
+      42: invokeinterface #781,  1          // InterfaceMethod com/cobblemon/mod/common/api/pokemon/aspect/AspectProvider.register:()Lcom/cobblemon/mod/common/api/pokemon/aspect/AspectProvider;
+      47: pop
+      48: invokestatic  #790                // Method com/cobblemon/mod/common/pokemon/aspects/PokemonAspectsKt.getALPHA_ASPECT:()Lcom/cobblemon/mod/common/api/pokemon/aspect/AspectProvider;
+      51: invokeinterface #781,  1          // InterfaceMethod com/cobblemon/mod/common/api/pokemon/aspect/AspectProvider.register:()Lcom/cobblemon/mod/common/api/pokemon/aspect/AspectProvider;
+      56: pop
+      57: invokestatic  #793                // Method com/cobblemon/mod/common/pokemon/aspects/PokemonAspectsKt.getMARK_ASPECT:()Lcom/cobblemon/mod/common/api/pokemon/aspect/AspectProvider;
+      60: invokeinterface #781,  1          // InterfaceMethod com/cobblemon/mod/common/api/pokemon/aspect/AspectProvider.register:()Lcom/cobblemon/mod/common/api/pokemon/aspect/AspectProvider;
+      65: pop
+      66: getstatic     #798                // Field com/cobblemon/mod/common/api/pokemon/feature/SpeciesFeatures.INSTANCE:Lcom/cobblemon/mod/common/api/pokemon/feature/SpeciesFeatures;
+      69: invokevirtual #801                // Method com/cobblemon/mod/common/api/pokemon/feature/SpeciesFeatures.getTypes:()Ljava/util/Map;
+      72: ldc_w         #803                // String choice
+      75: ldc_w         #805                // class com/cobblemon/mod/common/api/pokemon/feature/ChoiceSpeciesFeatureProvider
+      78: invokeinterface #811,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      83: pop
+      84: getstatic     #798                // Field com/cobblemon/mod/common/api/pokemon/feature/SpeciesFeatures.INSTANCE:Lcom/cobblemon/mod/common/api/pokemon/feature/SpeciesFeatures;
+      87: invokevirtual #801                // Method com/cobblemon/mod/common/api/pokemon/feature/SpeciesFeatures.getTypes:()Ljava/util/Map;
+      90: ldc_w         #813                // String weighted_choice
+      93: ldc_w         #815                // class com/cobblemon/mod/common/api/pokemon/feature/WeightedChoiceSpeciesFeatureProvider
+      96: invokeinterface #811,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     101: pop
+     102: getstatic     #798                // Field com/cobblemon/mod/common/api/pokemon/feature/SpeciesFeatures.INSTANCE:Lcom/cobblemon/mod/common/api/pokemon/feature/SpeciesFeatures;
+     105: invokevirtual #801                // Method com/cobblemon/mod/common/api/pokemon/feature/SpeciesFeatures.getTypes:()Ljava/util/Map;
+     108: ldc_w         #817                // String flag
+     111: ldc_w         #819                // class com/cobblemon/mod/common/api/pokemon/feature/FlagSpeciesFeatureProvider
+     114: invokeinterface #811,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     119: pop
+     120: getstatic     #798                // Field com/cobblemon/mod/common/api/pokemon/feature/SpeciesFeatures.INSTANCE:Lcom/cobblemon/mod/common/api/pokemon/feature/SpeciesFeatures;
+     123: invokevirtual #801                // Method com/cobblemon/mod/common/api/pokemon/feature/SpeciesFeatures.getTypes:()Ljava/util/Map;
+     126: ldc_w         #821                // String integer
+     129: ldc_w         #823                // class com/cobblemon/mod/common/api/pokemon/feature/IntSpeciesFeatureProvider
+     132: invokeinterface #811,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     137: pop
+     138: ldc_w         #825                // String sheared
+     141: new           #819                // class com/cobblemon/mod/common/api/pokemon/feature/FlagSpeciesFeatureProvider
+     144: dup
+     145: ldc_w         #825                // String sheared
+     148: invokestatic  #831                // Method kotlin/collections/CollectionsKt.listOf:(Ljava/lang/Object;)Ljava/util/List;
+     151: iconst_0
+     152: invokespecial #834                // Method com/cobblemon/mod/common/api/pokemon/feature/FlagSpeciesFeatureProvider."<init>":(Ljava/util/List;Z)V
+     155: checkcast     #836                // class com/cobblemon/mod/common/api/pokemon/feature/SpeciesFeatureProvider
+     158: invokestatic  #839                // Method com/cobblemon/mod/common/api/pokemon/feature/SpeciesFeatures.register:(Ljava/lang/String;Lcom/cobblemon/mod/common/api/pokemon/feature/SpeciesFeatureProvider;)V
+     161: ldc_w         #841                // String slowpoke_tail_regrowth
+     164: getstatic     #846                // Field com/cobblemon/mod/common/pokemon/feature/SlowpokeTailRegrowthSpeciesFeatureProvider.INSTANCE:Lcom/cobblemon/mod/common/pokemon/feature/SlowpokeTailRegrowthSpeciesFeatureProvider;
+     167: checkcast     #836                // class com/cobblemon/mod/common/api/pokemon/feature/SpeciesFeatureProvider
+     170: invokestatic  #839                // Method com/cobblemon/mod/common/api/pokemon/feature/SpeciesFeatures.register:(Ljava/lang/String;Lcom/cobblemon/mod/common/api/pokemon/feature/SpeciesFeatureProvider;)V
+     173: getstatic     #849                // Field com/cobblemon/mod/common/api/properties/CustomPokemonProperty.Companion:Lcom/cobblemon/mod/common/api/properties/CustomPokemonProperty$Companion;
+     176: getstatic     #854                // Field com/cobblemon/mod/common/pokemon/properties/UncatchableProperty.INSTANCE:Lcom/cobblemon/mod/common/pokemon/properties/UncatchableProperty;
+     179: checkcast     #856                // class com/cobblemon/mod/common/api/properties/CustomPokemonPropertyType
+     182: invokevirtual #859                // Method com/cobblemon/mod/common/api/properties/CustomPokemonProperty$Companion.register:(Lcom/cobblemon/mod/common/api/properties/CustomPokemonPropertyType;)V
+     185: getstatic     #849                // Field com/cobblemon/mod/common/api/properties/CustomPokemonProperty.Companion:Lcom/cobblemon/mod/common/api/properties/CustomPokemonProperty$Companion;
+     188: getstatic     #864                // Field com/cobblemon/mod/common/pokemon/properties/BattleCloneProperty.INSTANCE:Lcom/cobblemon/mod/common/pokemon/properties/BattleCloneProperty;
+     191: checkcast     #856                // class com/cobblemon/mod/common/api/properties/CustomPokemonPropertyType
+     194: invokevirtual #859                // Method com/cobblemon/mod/common/api/properties/CustomPokemonProperty$Companion.register:(Lcom/cobblemon/mod/common/api/properties/CustomPokemonPropertyType;)V
+     197: getstatic     #849                // Field com/cobblemon/mod/common/api/properties/CustomPokemonProperty.Companion:Lcom/cobblemon/mod/common/api/properties/CustomPokemonProperty$Companion;
+     200: getstatic     #869                // Field com/cobblemon/mod/common/pokemon/properties/LabelProperty.INSTANCE:Lcom/cobblemon/mod/common/pokemon/properties/LabelProperty;
+     203: checkcast     #856                // class com/cobblemon/mod/common/api/properties/CustomPokemonPropertyType
+     206: invokevirtual #859                // Method com/cobblemon/mod/common/api/properties/CustomPokemonProperty$Companion.register:(Lcom/cobblemon/mod/common/api/properties/CustomPokemonPropertyType;)V
+     209: getstatic     #849                // Field com/cobblemon/mod/common/api/properties/CustomPokemonProperty.Companion:Lcom/cobblemon/mod/common/api/properties/CustomPokemonProperty$Companion;
+     212: getstatic     #874                // Field com/cobblemon/mod/common/pokemon/properties/HiddenAbilityPropertyType.INSTANCE:Lcom/cobblemon/mod/common/pokemon/properties/HiddenAbilityPropertyType;
+     215: checkcast     #856                // class com/cobblemon/mod/common/api/properties/CustomPokemonPropertyType
+     218: invokevirtual #859                // Method com/cobblemon/mod/common/api/properties/CustomPokemonProperty$Companion.register:(Lcom/cobblemon/mod/common/api/properties/CustomPokemonPropertyType;)V
+     221: getstatic     #849                // Field com/cobblemon/mod/common/api/properties/CustomPokemonProperty.Companion:Lcom/cobblemon/mod/common/api/properties/CustomPokemonProperty$Companion;
+     224: getstatic     #879                // Field com/cobblemon/mod/common/pokemon/properties/AspectPropertyType.INSTANCE:Lcom/cobblemon/mod/common/pokemon/properties/AspectPropertyType;
+     227: checkcast     #856                // class com/cobblemon/mod/common/api/properties/CustomPokemonPropertyType
+     230: invokevirtual #859                // Method com/cobblemon/mod/common/api/properties/CustomPokemonProperty$Companion.register:(Lcom/cobblemon/mod/common/api/properties/CustomPokemonPropertyType;)V
+     233: getstatic     #849                // Field com/cobblemon/mod/common/api/properties/CustomPokemonProperty.Companion:Lcom/cobblemon/mod/common/api/properties/CustomPokemonProperty$Companion;
+     236: getstatic     #884                // Field com/cobblemon/mod/common/pokemon/properties/UnaspectPropertyType.INSTANCE:Lcom/cobblemon/mod/common/pokemon/properties/UnaspectPropertyType;
+     239: checkcast     #856                // class com/cobblemon/mod/common/api/properties/CustomPokemonPropertyType
+     242: invokevirtual #859                // Method com/cobblemon/mod/common/api/properties/CustomPokemonProperty$Companion.register:(Lcom/cobblemon/mod/common/api/properties/CustomPokemonPropertyType;)V
+     245: getstatic     #849                // Field com/cobblemon/mod/common/api/properties/CustomPokemonProperty.Companion:Lcom/cobblemon/mod/common/api/properties/CustomPokemonProperty$Companion;
+     248: getstatic     #889                // Field com/cobblemon/mod/common/pokemon/properties/FreezeFrameProperty.INSTANCE:Lcom/cobblemon/mod/common/pokemon/properties/FreezeFrameProperty;
+     251: checkcast     #856                // class com/cobblemon/mod/common/api/properties/CustomPokemonPropertyType
+     254: invokevirtual #859                // Method com/cobblemon/mod/common/api/properties/CustomPokemonProperty$Companion.register:(Lcom/cobblemon/mod/common/api/properties/CustomPokemonPropertyType;)V
+     257: getstatic     #849                // Field com/cobblemon/mod/common/api/properties/CustomPokemonProperty.Companion:Lcom/cobblemon/mod/common/api/properties/CustomPokemonProperty$Companion;
+     260: getstatic     #894                // Field com/cobblemon/mod/common/pokemon/properties/NoAIProperty.INSTANCE:Lcom/cobblemon/mod/common/pokemon/properties/NoAIProperty;
+     263: checkcast     #856                // class com/cobblemon/mod/common/api/properties/CustomPokemonPropertyType
+     266: invokevirtual #859                // Method com/cobblemon/mod/common/api/properties/CustomPokemonProperty$Companion.register:(Lcom/cobblemon/mod/common/api/properties/CustomPokemonPropertyType;)V
+     269: getstatic     #849                // Field com/cobblemon/mod/common/api/properties/CustomPokemonProperty.Companion:Lcom/cobblemon/mod/common/api/properties/CustomPokemonProperty$Companion;
+     272: getstatic     #899                // Field com/cobblemon/mod/common/pokemon/properties/HeldItemVisibleProperty.INSTANCE:Lcom/cobblemon/mod/common/pokemon/properties/HeldItemVisibleProperty;
+     275: checkcast     #856                // class com/cobblemon/mod/common/api/properties/CustomPokemonPropertyType
+     278: invokevirtual #859                // Method com/cobblemon/mod/common/api/properties/CustomPokemonProperty$Companion.register:(Lcom/cobblemon/mod/common/api/properties/CustomPokemonPropertyType;)V
+     281: getstatic     #902                // Field com/cobblemon/mod/common/api/events/CobblemonEvents.POKEMON_PROPERTY_INITIALISED:Lcom/cobblemon/mod/common/api/reactive/SimpleObservable;
+     284: iconst_1
+     285: anewarray     #904                // class kotlin/Unit
+     288: astore_1
+     289: aload_1
+     290: iconst_0
+     291: getstatic     #907                // Field kotlin/Unit.INSTANCE:Lkotlin/Unit;
+     294: aastore
+     295: aload_1
+     296: invokevirtual #913                // Method com/cobblemon/mod/common/api/reactive/SimpleObservable.emit:([Ljava/lang/Object;)V
+     299: getstatic     #918                // Field com/cobblemon/mod/common/events/CallbackHandler.INSTANCE:Lcom/cobblemon/mod/common/events/CallbackHandler;
+     302: invokevirtual #921                // Method com/cobblemon/mod/common/events/CallbackHandler.setup:()V
+     305: getstatic     #926                // Field com/cobblemon/mod/common/events/EntityCallbackHandler.INSTANCE:Lcom/cobblemon/mod/common/events/EntityCallbackHandler;
+     308: invokevirtual #927                // Method com/cobblemon/mod/common/events/EntityCallbackHandler.setup:()V
+     311: invokedynamic #936,  0            // InvokeDynamic #8:run:()Ljava/lang/Runnable;
+     316: invokestatic  #942                // Method com/cobblemon/mod/common/util/DistributionUtilsKt.ifDedicatedServer:(Ljava/lang/Runnable;)V
+     319: getstatic     #945                // Field com/cobblemon/mod/common/platform/events/PlatformEvents.SERVER_TICK_POST:Lcom/cobblemon/mod/common/api/reactive/EventObservable;
+     322: checkcast     #594                // class com/cobblemon/mod/common/api/reactive/Observable
+     325: aconst_null
+     326: invokedynamic #952,  0            // InvokeDynamic #9:invoke:()Lkotlin/jvm/functions/Function1;
+     331: iconst_1
+     332: aconst_null
+     333: invokestatic  #617                // InterfaceMethod com/cobblemon/mod/common/api/reactive/Observable.subscribe$default:(Lcom/cobblemon/mod/common/api/reactive/Observable;Lcom/cobblemon/mod/common/api/Priority;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/cobblemon/mod/common/api/reactive/ObservableSubscription;
+     336: pop
+     337: getstatic     #955                // Field com/cobblemon/mod/common/platform/events/PlatformEvents.SERVER_TICK_PRE:Lcom/cobblemon/mod/common/api/reactive/EventObservable;
+     340: checkcast     #594                // class com/cobblemon/mod/common/api/reactive/Observable
+     343: aconst_null
+     344: invokedynamic #962,  0            // InvokeDynamic #10:invoke:()Lkotlin/jvm/functions/Function1;
+     349: iconst_1
+     350: aconst_null
+     351: invokestatic  #617                // InterfaceMethod com/cobblemon/mod/common/api/reactive/Observable.subscribe$default:(Lcom/cobblemon/mod/common/api/reactive/Observable;Lcom/cobblemon/mod/common/api/Priority;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/cobblemon/mod/common/api/reactive/ObservableSubscription;
+     354: pop
+     355: getstatic     #965                // Field com/cobblemon/mod/common/platform/events/PlatformEvents.SERVER_STARTING:Lcom/cobblemon/mod/common/api/reactive/EventObservable;
+     358: checkcast     #594                // class com/cobblemon/mod/common/api/reactive/Observable
+     361: aconst_null
+     362: invokedynamic #972,  0            // InvokeDynamic #11:invoke:()Lkotlin/jvm/functions/Function1;
+     367: iconst_1
+     368: aconst_null
+     369: invokestatic  #617                // InterfaceMethod com/cobblemon/mod/common/api/reactive/Observable.subscribe$default:(Lcom/cobblemon/mod/common/api/reactive/Observable;Lcom/cobblemon/mod/common/api/Priority;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/cobblemon/mod/common/api/reactive/ObservableSubscription;
+     372: pop
+     373: getstatic     #975                // Field com/cobblemon/mod/common/platform/events/PlatformEvents.SERVER_STOPPED:Lcom/cobblemon/mod/common/api/reactive/EventObservable;
+     376: checkcast     #594                // class com/cobblemon/mod/common/api/reactive/Observable
+     379: aconst_null
+     380: invokedynamic #982,  0            // InvokeDynamic #12:invoke:()Lkotlin/jvm/functions/Function1;
+     385: iconst_1
+     386: aconst_null
+     387: invokestatic  #617                // InterfaceMethod com/cobblemon/mod/common/api/reactive/Observable.subscribe$default:(Lcom/cobblemon/mod/common/api/reactive/Observable;Lcom/cobblemon/mod/common/api/Priority;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/cobblemon/mod/common/api/reactive/ObservableSubscription;
+     390: pop
+     391: getstatic     #985                // Field com/cobblemon/mod/common/platform/events/PlatformEvents.SERVER_STARTED:Lcom/cobblemon/mod/common/api/reactive/EventObservable;
+     394: checkcast     #594                // class com/cobblemon/mod/common/api/reactive/Observable
+     397: aconst_null
+     398: invokedynamic #992,  0            // InvokeDynamic #13:invoke:()Lkotlin/jvm/functions/Function1;
+     403: iconst_1
+     404: aconst_null
+     405: invokestatic  #617                // InterfaceMethod com/cobblemon/mod/common/api/reactive/Observable.subscribe$default:(Lcom/cobblemon/mod/common/api/reactive/Observable;Lcom/cobblemon/mod/common/api/Priority;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/cobblemon/mod/common/api/reactive/ObservableSubscription;
+     408: pop
+     409: getstatic     #945                // Field com/cobblemon/mod/common/platform/events/PlatformEvents.SERVER_TICK_POST:Lcom/cobblemon/mod/common/api/reactive/EventObservable;
+     412: checkcast     #594                // class com/cobblemon/mod/common/api/reactive/Observable
+     415: aconst_null
+     416: invokedynamic #997,  0            // InvokeDynamic #14:invoke:()Lkotlin/jvm/functions/Function1;
+     421: iconst_1
+     422: aconst_null
+     423: invokestatic  #617                // InterfaceMethod com/cobblemon/mod/common/api/reactive/Observable.subscribe$default:(Lcom/cobblemon/mod/common/api/reactive/Observable;Lcom/cobblemon/mod/common/api/Priority;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/cobblemon/mod/common/api/reactive/ObservableSubscription;
+     426: pop
+     427: getstatic     #1002               // Field com/cobblemon/mod/common/battles/BagItems.INSTANCE:Lcom/cobblemon/mod/common/battles/BagItems;
+     430: invokevirtual #1006               // Method com/cobblemon/mod/common/battles/BagItems.getObservable:()Lcom/cobblemon/mod/common/api/reactive/SimpleObservable;
+     433: checkcast     #594                // class com/cobblemon/mod/common/api/reactive/Observable
+     436: aconst_null
+     437: invokedynamic #1013,  0           // InvokeDynamic #15:invoke:()Lkotlin/jvm/functions/Function1;
+     442: iconst_1
+     443: aconst_null
+     444: invokestatic  #617                // InterfaceMethod com/cobblemon/mod/common/api/reactive/Observable.subscribe$default:(Lcom/cobblemon/mod/common/api/reactive/Observable;Lcom/cobblemon/mod/common/api/Priority;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/cobblemon/mod/common/api/reactive/ObservableSubscription;
+     447: pop
+     448: aload_0
+     449: invokevirtual #1015               // Method registerEventHandlers:()V
+     452: getstatic     #1018               // Field com/cobblemon/mod/common/api/events/CobblemonEvents.COBBLEMON_INITIALISED:Lcom/cobblemon/mod/common/api/reactive/SimpleObservable;
+     455: iconst_1
+     456: anewarray     #904                // class kotlin/Unit
+     459: astore_1
+     460: aload_1
+     461: iconst_0
+     462: getstatic     #907                // Field kotlin/Unit.INSTANCE:Lkotlin/Unit;
+     465: aastore
+     466: aload_1
+     467: invokevirtual #913                // Method com/cobblemon/mod/common/api/reactive/SimpleObservable.emit:([Ljava/lang/Object;)V
+     470: return
+
+  public final void registerEventHandlers();
+    Code:
+       0: getstatic     #1023               // Field com/cobblemon/mod/common/events/AdvancementHandler.INSTANCE:Lcom/cobblemon/mod/common/events/AdvancementHandler;
+       3: invokevirtual #1026               // Method com/cobblemon/mod/common/events/AdvancementHandler.registerListeners:()V
+       6: getstatic     #1031               // Field com/cobblemon/mod/common/events/PokedexHandler.INSTANCE:Lcom/cobblemon/mod/common/events/PokedexHandler;
+       9: invokevirtual #1032               // Method com/cobblemon/mod/common/events/PokedexHandler.registerListeners:()V
+      12: getstatic     #1037               // Field com/cobblemon/mod/common/events/StatHandler.INSTANCE:Lcom/cobblemon/mod/common/events/StatHandler;
+      15: invokevirtual #1038               // Method com/cobblemon/mod/common/events/StatHandler.registerListeners:()V
+   

@@ -1,0 +1,40 @@
+mod fabric-api 0.116.18+1.21.1 -> fabric-api-0.116.18+1.21.1.jar
+mod fabric-language-kotlin 1.14.2+kotlin.2.4.21 -> fabric-language-kotlin-1.14.2+kotlin.2.4.21.jar
+mod luckperms v5.4.140-fabric -> LuckPerms-Fabric-5.4.140.jar
+mod placeholder-api 2.4.2+1.21 -> placeholder-api-2.4.2+1.21.jar
+mod cobblemon 1.8.4F -> Cobblemon-fabric-1.8.4+1.21.1.jar
+mod cobblepulse build/libs/cobblepulse-1.0.0.jar
+===== run json-1 =====
+server ready: True
+> cobblepulse selftest
+> cobblepulse selftest battle
+> cobblepulse selftest tournament
+> cobblepulse selftest report
+> cobblepulse reload
+[json-1] [09:38:27] [Server thread/INFO]: [CobblePulse][selftest] SELFTEST SUMMARY: 48 pass, 0 fail
+[json-1] [09:38:27] [Server thread/INFO]: SELFTEST SUMMARY: 48 pass, 0 fail
+exit code 0
+===== run json-2 =====
+server ready: True
+> cobblepulse selftest persisted
+> cobblepulse selftest report
+[json-2] [09:39:24] [Server thread/INFO]: [CobblePulse][selftest] SELFTEST SUMMARY: 5 pass, 0 fail
+[json-2] [09:39:24] [Server thread/INFO]: SELFTEST SUMMARY: 5 pass, 0 fail
+exit code 0
+===== run mysql-1 =====
+server ready: True
+> cobblepulse selftest
+> cobblepulse selftest battle
+> cobblepulse selftest tournament
+> cobblepulse selftest report
+> cobblepulse reload
+[mysql-1] [09:41:44] [Server thread/INFO]: [CobblePulse][selftest] SELFTEST SUMMARY: 48 pass, 0 fail
+[mysql-1] [09:41:44] [Server thread/INFO]: SELFTEST SUMMARY: 48 pass, 0 fail
+exit code 0
+===== run mysql-2 =====
+server ready: True
+> cobblepulse selftest persisted
+> cobblepulse selftest report
+[mysql-2] [09:42:41] [Server thread/INFO]: [CobblePulse][selftest] SELFTEST SUMMARY: 5 pass, 0 fail
+[mysql-2] [09:42:41] [Server thread/INFO]: SELFTEST SUMMARY: 5 pass, 0 fail
+exit code 0

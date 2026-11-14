@@ -1,0 +1,29 @@
+{
+  "lastInfluencePayout": 1794649070071,
+  "wars": [
+    {
+      "id": "1ce6656d-76cf-415e-bb4d-5da6ad9ca318",
+      "attackerId": "95e4c9f6-7e30-4f8f-bb4a-d632a32483d8",
+      "defenderId": "89481d3f-3e82-401f-8725-b48904ef1b22",
+      "attackerName": "TestAlpha",
+      "defenderName": "TestBravo",
+      "startedAt": 1794649066205,
+      "endsAt": 1794649094123,
+      "attackerPoints": 2,
+      "defenderPoints": 0,
+      "pairCounts": {
+        "92aac8ee-8f6a-3b5c-ace4-22ed6477987e|01971ec7-e028-3ce5-8785-0dfada61875c|20771": 1,
+        "92aac8ee-8f6a-3b5c-ace4-22ed6477987e|032f0469-2e5a-3ac4-b8c0-16518213262f|20771": 1
+      },
+      "finished": true,
+      "winnerId": "95e4c9f6-7e30-4f8f-bb4a-d632a32483d8",
+      "stolenInfluence": 20
+    }
+  ],
+  "warCooldowns": {
+    "89481d3f-3e82-401f-8725-b48904ef1b22|95e4c9f6-7e30-4f8f-bb4a-d632a32483d8": 1794735494123
+  },
+  "tournamentWinnerUuid": "92aac8ee-8f6a-3b5c-ace4-22ed6477987e",
+  "tournamentWinnerName": "CPAlpha",
+  "tournamentArenas": []
+}

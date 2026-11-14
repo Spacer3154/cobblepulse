@@ -1,0 +1,142 @@
+{
+  "uuid": "a0f741c1-0a72-3376-8eb2-6005346c98ed",
+  "name": "CPChallenger",
+  "badges": {
+    "champion_8": {
+      "postId": "champion_8",
+      "itemId": "minecraft:quartz",
+      "obtainedAt": 1794649028127,
+      "holderUuid": "8ade0f1d-36a2-3126-88e6-1e332c15fffd",
+      "holderName": "CPHolder",
+      "holderTypes": [
+        "electric"
+      ],
+      "durationSeconds": 6,
+      "turns": 1,
+      "challengerTeam": [
+        {
+          "species": "Charmander",
+          "level": 20,
+          "held": null,
+          "shiny": false
+        }
+      ],
+      "holderTeam": [
+        {
+          "species": "Pikachu",
+          "level": 20,
+          "held": null,
+          "shiny": false
+        }
+      ],
+      "battleId": "0ed9c68c-cb66-4798-bcb3-02598eaba1c3",
+      "note": null
+    }
+  },
+  "badgeCooldowns": {},
+  "placeCooldownUntil": 0,
+  "audit": [
+    {
+      "time": 1794649052070,
+      "context": "league",
+      "postId": "champion_8",
+      "kind": "BADGE",
+      "opponentUuid": "8ade0f1d-36a2-3126-88e6-1e332c15fffd",
+      "opponentName": "CPHolder",
+      "asChallenger": false,
+      "won": true,
+      "forfeit": true,
+      "durationSeconds": 2,
+      "turns": 0,
+      "myTeam": [
+        {
+          "species": "Charmander",
+          "level": 20,
+          "held": null,
+          "shiny": false
+        }
+      ],
+      "opponentTeam": [
+        {
+          "species": "Pikachu",
+          "level": 20,
+          "held": null,
+          "shiny": false
+        }
+      ],
+      "note": "Forfait (déconnexion)"
+    },
+    {
+      "time": 1794649042171,
+      "context": "league",
+      "postId": "champion_8",
+      "kind": "PLACE",
+      "opponentUuid": "8ade0f1d-36a2-3126-88e6-1e332c15fffd",
+      "opponentName": "CPHolder",
+      "asChallenger": true,
+      "won": true,
+      "forfeit": false,
+      "durationSeconds": 6,
+      "turns": 1,
+      "myTeam": [
+        {
+          "species": "Charmander",
+          "level": 20,
+          "held": null,
+          "shiny": false
+        }
+      ],
+      "opponentTeam": [
+        {
+          "species": "Pikachu",
+          "level": 20,
+          "held": null,
+          "shiny": false
+        }
+      ],
+      "note": "Victoire"
+    },
+    {
+      "time": 1794649028127,
+      "context": "league",
+      "postId": "champion_8",
+      "kind": "BADGE",
+      "opponentUuid": "8ade0f1d-36a2-3126-88e6-1e332c15fffd",
+      "opponentName": "CPHolder",
+      "asChallenger": true,
+      "won": true,
+      "forfeit": false,
+      "durationSeconds": 6,
+      "turns": 1,
+      "myTeam": [
+        {
+          "species": "Charmander",
+          "level": 20,
+          "held": null,
+          "shiny": false
+        }
+      ],
+      "opponentTeam": [
+        {
+          "species": "Pikachu",
+          "level": 20,
+          "held": null,
+          "shiny": false
+        }
+      ],
+      "note": "Victoire"
+    }
+  ],
+  "leagueWins": 3,
+  "leagueLosses": 0,
+  "tournamentMatchWins": 0,
+  "tournamentMatchLosses": 0,
+  "tournamentsWon": 0,
+  "tournamentsPlayed": 0,
+  "favoritePokemon": null,
+  "pokemonUsage": {
+    "Charmander": 3
+  },
+  "pendingRewards": "",
+  "lastSeen": 0
+}

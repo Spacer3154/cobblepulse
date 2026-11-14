@@ -1,0 +1,130 @@
+public final void end();
+    Code:
+       0: aload_0
+       1: iconst_1
+       2: putfield      #537                // Field ended:Z
+       5: nop
+       6: aload_0
+       7: getfield      #430                // Field winners:Ljava/util/List;
+      10: checkcast     #382                // class java/util/Collection
+      13: invokeinterface #599,  1          // InterfaceMethod java/util/Collection.isEmpty:()Z
+      18: ifne          25
+      21: iconst_1
+      22: goto          26
+      25: iconst_0
+      26: ifeq          133
+      29: aload_0
+      30: getfield      #419                // Field showdownMessages:Ljava/util/List;
+      33: checkcast     #335                // class java/lang/Iterable
+      36: astore_2
+      37: iconst_0
+      38: istore_3
+      39: aload_2
+      40: instanceof    #382                // class java/util/Collection
+      43: ifeq          62
+      46: aload_2
+      47: checkcast     #382                // class java/util/Collection
+      50: invokeinterface #599,  1          // InterfaceMethod java/util/Collection.isEmpty:()Z
+      55: ifeq          62
+      58: iconst_0
+      59: goto          124
+      62: aload_2
+      63: invokeinterface #339,  1          // InterfaceMethod java/lang/Iterable.iterator:()Ljava/util/Iterator;
+      68: astore        4
+      70: aload         4
+      72: invokeinterface #346,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+      77: ifeq          123
+      80: aload         4
+      82: invokeinterface #350,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      87: astore        5
+      89: aload         5
+      91: checkcast     #641                // class java/lang/String
+      94: astore        6
+      96: iconst_0
+      97: istore        7
+      99: aload         6
+     101: checkcast     #723                // class java/lang/CharSequence
+     104: ldc_w         #806                // String capture
+     107: checkcast     #723                // class java/lang/CharSequence
+     110: iconst_0
+     111: iconst_2
+     112: aconst_null
+     113: invokestatic  #731                // Method kotlin/text/StringsKt.contains$default:(Ljava/lang/CharSequence;Ljava/lang/CharSequence;ZILjava/lang/Object;)Z
+     116: ifeq          70
+     119: iconst_1
+     120: goto          124
+     123: iconst_0
+     124: ifeq          133
+     127: getstatic     #811                // Field com/cobblemon/mod/common/api/battles/model/BattleEndResult.CAPTURE:Lcom/cobblemon/mod/common/api/battles/model/BattleEndResult;
+     130: goto          214
+     133: aload_0
+     134: getfield      #430                // Field winners:Ljava/util/List;
+     137: checkcast     #382                // class java/util/Collection
+     140: invokeinterface #599,  1          // InterfaceMethod java/util/Collection.isEmpty:()Z
+     145: ifne          152
+     148: iconst_1
+     149: goto          153
+     152: iconst_0
+     153: ifeq          169
+     156: aload_0
+     157: getfield      #541                // Field forfeitedBy:Lcom/cobblemon/mod/common/api/battles/model/actor/BattleActor;
+     160: ifnull        169
+     163: getstatic     #814                // Field com/cobblemon/mod/common/api/battles/model/BattleEndResult.FORFEIT:Lcom/cobblemon/mod/common/api/battles/model/BattleEndResult;
+     166: goto          214
+     169: aload_0
+     170: getfield      #430                // Field winners:Ljava/util/List;
+     173: checkcast     #382                // class java/util/Collection
+     176: invokeinterface #599,  1          // InterfaceMethod java/util/Collection.isEmpty:()Z
+     181: ifne          188
+     184: iconst_1
+     185: goto          189
+     188: iconst_0
+     189: ifeq          198
+     192: getstatic     #817                // Field com/cobblemon/mod/common/api/battles/model/BattleEndResult.VICTORY:Lcom/cobblemon/mod/common/api/battles/model/BattleEndResult;
+     195: goto          214
+     198: aload_0
+     199: getfield      #543                // Field fled:Z
+     202: ifeq          211
+     205: getstatic     #820                // Field com/cobblemon/mod/common/api/battles/model/BattleEndResult.FLED:Lcom/cobblemon/mod/common/api/battles/model/BattleEndResult;
+     208: goto          214
+     211: getstatic     #823                // Field com/cobblemon/mod/common/api/battles/model/BattleEndResult.STOPPED:Lcom/cobblemon/mod/common/api/battles/model/BattleEndResult;
+     214: astore_1
+     215: aload_0
+     216: aload_1
+     217: putfield      #539                // Field endResult:Lcom/cobblemon/mod/common/api/battles/model/BattleEndResult;
+     220: getstatic     #826                // Field com/cobblemon/mod/common/Cobblemon.INSTANCE:Lcom/cobblemon/mod/common/Cobblemon;
+     223: invokevirtual #830                // Method com/cobblemon/mod/common/Cobblemon.getConfig:()Lcom/cobblemon/mod/common/config/CobblemonConfig;
+     226: invokevirtual #835                // Method com/cobblemon/mod/common/config/CobblemonConfig.getAwardExperienceToFaintedPokemon:()Z
+     229: istore_2
+     230: getstatic     #826                // Field com/cobblemon/mod/common/Cobblemon.INSTANCE:Lcom/cobblemon/mod/common/Cobblemon;
+     233: invokevirtual #830                // Method com/cobblemon/mod/common/Cobblemon.getConfig:()Lcom/cobblemon/mod/common/config/CobblemonConfig;
+     236: invokevirtual #838                // Method com/cobblemon/mod/common/config/CobblemonConfig.getAwardExperienceOnBattleLoss:()Z
+     239: istore_3
+     240: aload_0
+     241: invokevirtual #333                // Method getActors:()Ljava/lang/Iterable;
+     244: astore        4
+     246: iconst_0
+     247: istore        5
+     249: aload         4
+     251: invokeinterface #339,  1          // InterfaceMethod java/lang/Iterable.iterator:()Ljava/util/Iterator;
+     256: astore        6
+     258: aload         6
+     260: invokeinterface #346,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+     265: ifeq          1706
+     26
+
+public final void stop();
+    Code:
+       0: aload_0
+       1: iconst_1
+       2: anewarray     #641                // class java/lang/String
+       5: astore_1
+       6: aload_1
+       7: iconst_0
+       8: ldc_w         #1621               // String >forcetie
+      11: aastore
+      12: aload_1
+      13: invokevirtual #1623               // Method writeShowdownAction:([Ljava/lang/String;)V
+      16: aload_0
+      17: invokevirtual #1625               // Method end:()V
+      20: return

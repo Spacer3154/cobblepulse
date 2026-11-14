@@ -1,0 +1,18 @@
+{
+  "uuid": "032f0469-2e5a-3ac4-b8c0-16518213262f",
+  "name": "CPCharlie",
+  "badges": {},
+  "badgeCooldowns": {},
+  "placeCooldownUntil": 0,
+  "audit": [],
+  "leagueWins": 0,
+  "leagueLosses": 0,
+  "tournamentMatchWins": 0,
+  "tournamentMatchLosses": 1,
+  "tournamentsWon": 0,
+  "tournamentsPlayed": 1,
+  "favoritePokemon": null,
+  "pokemonUsage": {},
+  "pendingRewards": "",
+  "lastSeen": 0
+}

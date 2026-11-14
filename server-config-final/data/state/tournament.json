@@ -1,0 +1,98 @@
+{
+  "id": "a02095b5-c0d3-4906-ba47-df5a32a4c67e",
+  "name": "Selftest Cup",
+  "tier": "ag",
+  "state": "FINISHED",
+  "createdAt": 1794649066206,
+  "createdBy": "Console",
+  "bracketSize": 4,
+  "participants": {
+    "92aac8ee-8f6a-3b5c-ace4-22ed6477987e": {
+      "uuid": "92aac8ee-8f6a-3b5c-ace4-22ed6477987e",
+      "name": "CPAlpha",
+      "disqualified": false,
+      "dqReason": null,
+      "placementLo": 1,
+      "placementHi": 1,
+      "wins": 2,
+      "losses": 0
+    },
+    "01971ec7-e028-3ce5-8785-0dfada61875c": {
+      "uuid": "01971ec7-e028-3ce5-8785-0dfada61875c",
+      "name": "CPBravo",
+      "disqualified": false,
+      "dqReason": null,
+      "placementLo": 3,
+      "placementHi": 4,
+      "wins": 0,
+      "losses": 1
+    },
+    "032f0469-2e5a-3ac4-b8c0-16518213262f": {
+      "uuid": "032f0469-2e5a-3ac4-b8c0-16518213262f",
+      "name": "CPCharlie",
+      "disqualified": false,
+      "dqReason": null,
+      "placementLo": 2,
+      "placementHi": 2,
+      "wins": 0,
+      "losses": 1
+    }
+  },
+  "rounds": [
+    {
+      "index": 0,
+      "slots": 4,
+      "started": true,
+      "matches": [
+        {
+          "index": 0,
+          "p1": "92aac8ee-8f6a-3b5c-ace4-22ed6477987e",
+          "p2": "01971ec7-e028-3ce5-8785-0dfada61875c",
+          "n1": "CPAlpha",
+          "n2": "CPBravo",
+          "winner": "92aac8ee-8f6a-3b5c-ace4-22ed6477987e",
+          "status": "DONE",
+          "bye": false,
+          "thirdPlace": false,
+          "note": null
+        },
+        {
+          "index": 1,
+          "p1": "032f0469-2e5a-3ac4-b8c0-16518213262f",
+          "p2": null,
+          "n1": "CPCharlie",
+          "n2": null,
+          "winner": "032f0469-2e5a-3ac4-b8c0-16518213262f",
+          "status": "DONE",
+          "bye": true,
+          "thirdPlace": false,
+          "note": "bye"
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "slots": 2,
+      "started": true,
+      "matches": [
+        {
+          "index": 0,
+          "p1": "92aac8ee-8f6a-3b5c-ace4-22ed6477987e",
+          "p2": "032f0469-2e5a-3ac4-b8c0-16518213262f",
+          "n1": "CPAlpha",
+          "n2": "CPCharlie",
+          "winner": "92aac8ee-8f6a-3b5c-ace4-22ed6477987e",
+          "status": "DONE",
+          "bye": false,
+          "thirdPlace": false,
+          "note": null
+        }
+      ]
+    }
+  ],
+  "currentRound": 1,
+  "roundActive": false,
+  "thirdPlace": null,
+  "winnerUuid": "92aac8ee-8f6a-3b5c-ace4-22ed6477987e",
+  "rewardsDistributed": true
+}
